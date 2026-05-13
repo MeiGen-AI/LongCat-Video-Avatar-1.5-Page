@@ -29,5 +29,3 @@
 - **Natural Human Dynamics**: The disentangled unconditional guidance is designed to effectively decouple speech signals from motion dynamics for natural behavior.
 - **Avoid Repetitive Content**: The reference skip attention is adopted to​ strategically incorporates reference cues to preserve identity while preventing excessive conditional image leakage
 - **Alleviate Error Accumulation from VAE**: Cross-Chunk Latent Stitching is designed to eliminates redundant VAE decode-encode cycles to reduce pixel degradation in long sequences
-
-
