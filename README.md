@@ -1,7 +1,7 @@
 # LongCat-Video-Avatar 1.5
 
 <div align="center">
-  <img src="assets/icons/longcat_video_avatar_1.5_title.svg" width="45%" alt="LongCat-Video-Avatar 1.5" />
+  <img src="assets/icons/longcat_video_avatar_1.5_title.webp" width="45%" alt="LongCat-Video-Avatar 1.5" />
 </div>
 <hr>
 
@@ -23,14 +23,11 @@
 
 
 ## 🔥 Latest News
-* May 19, 2026: 🚀 We are excited to announce **[LongCat-Video-Avatar 1.5](https://meigen-ai.github.io/LongCat-Video-Avatar-1.5-Page/)**, the latest open-source release in the LC Avatar series for high-quality audio-driven video generation. Version 1.5 improves stability, lip-sync accuracy, long-video consistency, and generation speed, bringing research-grade avatar generation closer to production-ready use.
+* May 21, 2026: 🚀 We release [***LongCat-Video-Avatar-1.5***](https://meigen-ai.github.io/LongCat-Video-Avatar-1.5/), an upgraded open-source framework for audio-driven human video generation. v1.5 replaces Wav2Vec2 with Whisper-Large for more accurate lip synchronization, achieves production-ready physical rationality and temporal stability with robust long-video generation, generalizes to stylized domains (anime, animals, complex real-world conditions), supports both single-stream and multi-stream audio inputs, and accelerates inference to 8 steps via step distillation. [ [***code***](https://github.com/meituan-longcat/LongCat-Video) | 🤗 [***weights***](https://huggingface.co/meituan-longcat/LongCat-Video-Avatar-1.5) | [***project page***](https://meigen-ai.github.io/LongCat-Video-Avatar-1.5/) ]
 * Dec 16, 2025: We released **[LongCat-Video-Avatar](https://github.com/MeiGen-AI/LongCat-Video-Avatar)**, a unified model that delivers expressive and highly dynamic audio-driven character animation, supporting native tasks including Audio-Text-to-Video, Audio-Text-Image-to-Video, and Video Continuation with seamless compatibility for both single-stream and multi-stream audio inputs. The release includes our Technical Report, [code](https://github.com/meituan-longcat/LongCat-Video), [model weights](https://huggingface.co/meituan-longcat/LongCat-Video-Avatar-1.5), and [project page](https://meigen-ai.github.io/LongCat-Video-Avatar/).
 
 ## ✨ Key Features: 
-- **Stronger Lip-Sync and Stability**: LongCat-Video-Avatar 1.5 adopts a Whisper-large audio encoder to produce more accurate, natural, and fluent mouth movements.
-- **Fine-Grained Audio-Visual Alignment**: Multi-stage data processing and per-frame strategy optimization help align speech with lip motion and facial expression while maintaining consistency in long videos.
-- **Consistent Full-Body Motion**: The model preserves temporal coherence across full-body movements, reducing motion jitter and identity drift over extended generation.
-- **Robust Identity Preservation**: LongCat-Video-Avatar 1.5 keeps character identity stable across frames and adapts to challenging scenarios such as multi-person videos and hand-object interactions.
-- **Fast 8-Step Generation**: With Distribution Matching Distillation (DMD), the model can generate high-quality videos in only 8 steps, significantly improving inference speed while preserving visual quality.
-- **Competitive Human Preference**: Evaluations show that LongCat-Video-Avatar 1.5 outperforms OmniHuman 1.5, HeyGen, and Kling Avatar 2.0 in stability, consistency, and natural lip motion, with stronger overall human preference.
-- **Support Multiple Generation Modes**: One unified model can be used for Audio-Text-to-Video (AT2V), Audio-Text-Image-to-Video (ATI2V), and Video Continuation.
+- **Upgraded Audio Encoder (Whisper-Large)**: Replaces Wav2Vec2 with Whisper-Large, yielding significantly smoother and more natural lip dynamics.
+- **Production-Ready Stability**: Achieves accurate lip-synchronization, full-body temporal stability, and robust long-video generation with strict identity consistency.
+- **Stylized Domain Generalization**: Robustly generalizes to anime, animals, and complex real-world conditions such as multi-person interactions and object handling.
+- **Efficient 8-Step Inference**: Advanced DMD2-based step distillation accelerates inference to 8 NFE, balancing cost-effective serving with exceptional visual fidelity.
