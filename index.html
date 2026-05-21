@@ -122,6 +122,20 @@
     box-shadow: 0 10px 40px rgba(0,0,0,0.3);
 }
 
+.video-player.video-portrait {
+    aspect-ratio: 16 / 9;
+    max-height: min(62vh, 520px);
+    align-items: center;
+    justify-content: center;
+    background: #111;
+}
+
+.video-player.video-portrait video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
 .carousel-item.active .video-player {
     box-shadow: 0 20px 60px rgba(0,0,0,0.6);
 }
@@ -1208,6 +1222,10 @@
                             <span class="icon"><i class="fab fa-github"></i></span>
                             <span>Code</span>
                         </a>
+                        <a class="paper-button" href="https://huggingface.co/meituan-longcat/LongCat-Video-Avatar-1.5" target="_blank" rel="noopener noreferrer">
+                            <span class="icon">🤗</span>
+                            <span>Hugging Face</span>
+                        </a>
                         <p style="font-style: italic;">An expressive avatar model built upon LongCat-Video</p>
                     </div>
                 </div>
@@ -1246,7 +1264,6 @@
                             <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/talk/6.mp4"></video></div></div>
                             <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/talk/7.mp4"></video></div></div>
                             <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/talk/8.mp4"></video></div></div>
-                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/talk/9.mp4"></video></div></div>
                             <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/talk/10.mp4"></video></div></div>
                             <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/talk/11.mp4"></video></div></div>
                             <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/talk/12.mp4"></video></div></div>
@@ -1304,6 +1321,7 @@
                             <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/animations/4.mp4"></video></div></div>
                             <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/animations/5.mp4"></video></div></div>
                             <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/animations/6.mp4"></video></div></div>
+                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/animations/7.mp4"></video></div></div>
                         </div>
                     </div>
                     <button class="carousel-nav next">›</button>
@@ -1324,6 +1342,10 @@
                             <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/multitalk/3.mp4"></video></div></div>
                             <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/multitalk/4.mp4"></video></div></div>
                             <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/multitalk/5.mp4"></video></div></div>
+                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/multitalk/6.mp4"></video></div></div>
+                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/multitalk/7.mp4"></video></div></div>
+                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/multitalk/8.mp4"></video></div></div>
+                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/multitalk/9.mp4"></video></div></div>
                         </div>
                     </div>
                     <button class="carousel-nav next">›</button>
@@ -1743,13 +1765,47 @@ function initCarousel(containerId) {
     if (!container) return;
     
     const track = container.querySelector('.carousel-track');
-    const items = Array.from(container.querySelectorAll('.carousel-item'));
+    const items = Array.from(track.querySelectorAll('.carousel-item'));
+    if (!items.length) return;
+
+    const firstClone = items[0].cloneNode(true);
+    const lastClone = items[items.length - 1].cloneNode(true);
+    firstClone.classList.add('carousel-clone');
+    lastClone.classList.add('carousel-clone');
+    track.insertBefore(lastClone, items[0]);
+    track.appendChild(firstClone);
+
+    const slideItems = Array.from(track.querySelectorAll('.carousel-item'));
     const prevBtn = container.querySelector('.carousel-nav.prev');
     const nextBtn = container.querySelector('.carousel-nav.next');
     const captionDiv = container.querySelector('.carousel-caption');
     const dotsContainer = container.querySelector('.carousel-dots');
     
     let currentIndex = 0;
+    let currentSlideIndex = 1;
+    let isAnimating = false;
+
+    function getRealIndex(slideIndex) {
+        if (slideIndex === 0) return items.length - 1;
+        if (slideIndex === slideItems.length - 1) return 0;
+        return slideIndex - 1;
+    }
+
+    function markVideoOrientation(video) {
+        const player = video.closest('.video-player');
+        if (!player || !video.videoWidth || !video.videoHeight) return;
+        player.classList.toggle('video-portrait', video.videoHeight > video.videoWidth);
+    }
+
+    slideItems.forEach(item => {
+        item.querySelectorAll('video').forEach(video => {
+            if (video.readyState >= 1) {
+                markVideoOrientation(video);
+            } else {
+                video.addEventListener('loadedmetadata', () => markVideoOrientation(video), { once: true });
+            }
+        });
+    });
     
     // Create dots
     items.forEach((_, index) => {
@@ -1762,10 +1818,13 @@ function initCarousel(containerId) {
     
     const dots = Array.from(dotsContainer.querySelectorAll('.carousel-dot'));
     
-    function updateCarousel() {
+    function updateCarousel(animate = true) {
+        currentIndex = getRealIndex(currentSlideIndex);
+        track.style.transition = animate ? '' : 'none';
+
         // Calculate offset to center the active item
 // 获取当前选中的元素
-        const activeItem = items[currentIndex];
+        const activeItem = slideItems[currentSlideIndex];
         
         // 1. 获取容器的中心点坐标
         const containerCenter = container.offsetWidth / 2;
@@ -1778,12 +1837,16 @@ function initCarousel(containerId) {
         // 这样可以将元素的中心点与容器的中心点对齐
         const offset = containerCenter - itemCenter;
 
-        track.style.transform = `translateX(${offset}px)`;        
         track.style.transform = `translateX(${offset}px)`;
+
+        if (!animate) {
+            track.offsetHeight;
+            track.style.transition = '';
+        }
         
         // Update active states
-        items.forEach((item, index) => {
-            if (index === currentIndex) {
+        slideItems.forEach((item, index) => {
+            if (index === currentSlideIndex) {
                 item.classList.add('active');
             } else {
                 item.classList.remove('active');
@@ -1804,15 +1867,15 @@ function initCarousel(containerId) {
         captionDiv.innerHTML = `<p class="active">${currentCaption}</p>`;
         
         // Play current video
-        const currentVideo = items[currentIndex].querySelector('video');
+        const currentVideo = slideItems[currentSlideIndex].querySelector('video');
         if (currentVideo) {
             currentVideo.currentTime = 0;
             currentVideo.play();
         }
         
         // Pause other videos
-        items.forEach((item, index) => {
-            if (index !== currentIndex) {
+        slideItems.forEach((item, index) => {
+            if (index !== currentSlideIndex) {
                 const video = item.querySelector('video');
                 if (video) video.pause();
             }
@@ -1821,18 +1884,39 @@ function initCarousel(containerId) {
     
     function goToSlide(index) {
         currentIndex = ((index % items.length) + items.length) % items.length;
+        currentSlideIndex = currentIndex + 1;
         updateCarousel();
     }
     
     function nextSlide() {
-        currentIndex = (currentIndex + 1) % items.length;
+        if (isAnimating) return;
+        isAnimating = true;
+        currentSlideIndex += 1;
         updateCarousel();
     }
     
     function prevSlide() {
-        currentIndex = (currentIndex - 1 + items.length) % items.length;
+        if (isAnimating) return;
+        isAnimating = true;
+        currentSlideIndex -= 1;
         updateCarousel();
     }
+
+    track.addEventListener('transitionend', (e) => {
+        if (e.target !== track || e.propertyName !== 'transform') return;
+
+        if (currentSlideIndex === slideItems.length - 1) {
+            currentSlideIndex = 1;
+            updateCarousel(false);
+        }
+
+        if (currentSlideIndex === 0) {
+            currentSlideIndex = items.length;
+            updateCarousel(false);
+        }
+
+        isAnimating = false;
+    });
     
     // Event listeners
     prevBtn.addEventListener('click', prevSlide);
@@ -1840,8 +1924,8 @@ function initCarousel(containerId) {
     
     // Mouse wheel support
     let lastWheelSlideAt = 0;
-    const wheelSlideCooldown = 450;
-    const wheelSlideThreshold = 80;
+    const wheelSlideCooldown = 260;
+    const wheelSlideThreshold = 18;
 
     container.addEventListener('wheel', (e) => {
         const absDeltaX = Math.abs(e.deltaX);
@@ -1915,6 +1999,20 @@ function initCarousel(containerId) {
 
 // Initialize both carousels
 document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.video-player video').forEach(video => {
+        const markOrientation = () => {
+            const player = video.closest('.video-player');
+            if (!player || !video.videoWidth || !video.videoHeight) return;
+            player.classList.toggle('video-portrait', video.videoHeight > video.videoWidth);
+        };
+
+        if (video.readyState >= 1) {
+            markOrientation();
+        } else {
+            video.addEventListener('loadedmetadata', markOrientation, { once: true });
+        }
+    });
+
     initCarousel('carousel-stability');
     initCarousel('carousel-animation');
     initCarousel('carousel-singing');
