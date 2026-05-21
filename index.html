@@ -2,8 +2,8 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>LongCat-Video-Avatar</title>
-        <meta name="description" content="LongCat-Video-Avatar a unified model that delivers expressive and highly dynamic audio-driven character animation.">
+        <title>LongCat-Video-Avatar 1.5</title>
+        <meta name="description" content="LongCat-Video-Avatar 1.5 is an open-source audio-driven video generation model with stronger stability, lip-sync accuracy, consistency, and fast 8-step generation.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#000000">
 
@@ -292,7 +292,7 @@
             body {
                 margin: 0;
                 font-family: "Outfit", sans-serif;
-                background: #28282d;
+                background: linear-gradient(180deg, #17191c 0%, #111416 42%, #0d0d0e 100%);
                 color: #fff;
             }
 
@@ -322,8 +322,24 @@
 
 
             section {
-                border-top: 1px solid #333;
+                border-top: 1px solid rgba(255, 255, 255, 0.08);
                 padding: 48px calc(50vw - min(45vw, 1600px / 2));
+            }
+
+            #introduction {
+                background: linear-gradient(180deg, #15191c 0%, #101416 100%);
+            }
+
+            #stability {
+                background: linear-gradient(180deg, #101416 0%, #171917 46%, #111312 100%);
+            }
+
+            #commercial {
+                background: linear-gradient(180deg, #151312 0%, #1a1714 52%, #111111 100%);
+            }
+
+            #version {
+                background: linear-gradient(180deg, #111111 0%, #151619 48%, #0e1012 100%);
             }
 
             .text {
@@ -394,6 +410,14 @@
             }
             #t2v .feature-video {
                 aspect-ratio: 21 / 9;
+            }
+            #introduction .feature-video {
+                aspect-ratio: 16 / 9;
+                max-width: 960px;
+                margin: 0 auto;
+                border-radius: 16px;
+                overflow: hidden;
+                background: #222;
             }
             .feature-video {
                 position: relative;
@@ -894,7 +918,7 @@
             }
 
             #team {
-                background-color: #000;
+                background: linear-gradient(180deg, #0e1012 0%, #090a0b 100%);
                 text-align: center;
                 padding: 80px 16px 160px 16px;
                 display: flex;
@@ -1163,678 +1187,302 @@
         <!-- <div id="logo">
             <svg viewBox="1.37 0 1198.25 1051.64" xmlns="http://www.w3.org/2000/svg"><path d="m206.82 943.8-205.45 52.74v-941.44l205.45 53.14z" fill="#fff"/><path d="m532.79 972.14-205.44 53.13v-554.55l205.44 53.13z" fill="#fff"/><path d="m667.02 388.86 205.84-53.14v554.55l-205.84-53.13z" fill="#fff"/><path d="m1199.62 998.9-205.84 52.74v-1051.64l205.84 53.13z" fill="#fff"/></svg>
         </div> -->
-        <section id="intro">
-            <div class="background-video">
-                <video muted loop playsinline preload="none" src="videos/first2/i2v_singer_14.mp4"></video>
-            </div>
-            <div class="content">
+            <section id="intro">
+                <div class="background-video">
+                    <video muted loop playsinline preload="none" src="videos/teaser/teaser.mp4"></video>
+                </div>
+                <div class="content">
+                    <div class="text">
+                        <!-- <h3>MeiGen-LongCat-Video-Avatar</h3> -->
+                        <h1>LongCat-Video-Avatar 1.5</h1>
+                        <div class="is-size-5 publication-authors">
+                            Meituan LongCat Team
+                        </div>
+                        <br>
+        
+                        <a class="paper-button" href="" target="_blank" rel="noopener noreferrer">
+                            <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                            <span>Technique Report</span>
+                        </a>
+                        <a class="paper-button" href="https://github.com/meituan-longcat/LongCat-Video" target="_blank" rel="noopener noreferrer">
+                            <span class="icon"><i class="fab fa-github"></i></span>
+                            <span>Code</span>
+                        </a>
+                        <p style="font-style: italic;">An expressive avatar model built upon LongCat-Video</p>
+                    </div>
+                </div>
+            </section>
+        
+            <section id="introduction">
                 <div class="text">
-                    <!-- <h3>MeiGen-LongCat-Video-Avatar</h3> -->
-                    <h1>LongCat-Video-Avatar</h1>
-                    <div class="is-size-5 publication-authors">
-                        Meituan LongCat Team
-                    </div>
-                    <br>
-
-                    <a class="paper-button" href="" target="_blank" rel="noopener noreferrer">
-                        <!-- <span class="icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000"><path d="M280-280h280v-80H280v80Zm0-160h400v-80H280v80Zm0-160h400v-80H280v80Zm-80 480q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"/></svg>
-                        </span> -->
-                        <span class="icon">
-                            <!-- <i class="ai ai-arxiv"></i> -->
-                            <i class="fas fa-file-pdf"></i>
-                        </span>
-                        <span>
-                            Technique Report
-                        </span>
-                    </a>
-                    <a class="paper-button" href="https://github.com/meituan-longcat/LongCat-Video" target="_blank" rel="noopener noreferrer">
-                        <!-- <span class="icon">
-                            <svg  class="fab fa-github" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000"><path d="M280-280h280v-80H280v80Zm0-160h400v-80H280v80Zm0-160h400v-80H280v80Zm-80 480q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"/></svg>
-                        </span> -->
-                        <span class="icon">
-                            <i class="fab fa-github"></i>
-                        </span>
-                        <span>
-                            Code
-                        </span>
-                    </a>
-                    <p style="font-style: italic;">An expressive avatar model built upon LongCat-Video</p>
+                    <h1>Introduction Video</h1>
+                    <p>
+                        Introduce what LongCat-Video-Avatar 1.5 is, why it upgrades the 1.0 release, and how the model combines stable avatar generation with practical inference speed.
+                    </p>
                 </div>
-            </div>
-        </section>
-
-        <section id="shots">
-            <div class="text">
-                <h1>Actor/Actoress</h1>
-                Produces natural facial expressions and lip movements that stay perfectly in sync with dialogue, maintaining character identity flawlessly even during extended scenes. 
-                Note that  <span style='color: #3498db; font-weight: bold;'>[ATI2V]</span> represents audio-text-image-to-video generation while <span style='color: #27ae60; font-weight: bold;'>[AT2V]</span>
-                represents audio-text-to-video generation.
-            </div>
-            <div class="carousel-container" id="carousel-shots">
-                <button class="carousel-nav prev">‹</button>
-
-                <div class="carousel-wrapper">
-                    <div class="carousel-track">
-                        <div class="carousel-item" data-caption="<span style='color: #3498db; font-weight: bold;'>[ATI2V]</span> A haunting, cinematic close-up of a man. The man is laughing. 
-                            The frame is a tight portrait, capturing him from the chest up, positioned slightly left of center. His long, unkempt hair frames a face etched with profound sorrow and exhaustion. ">
-                            <div class="video-player audio-control">
-                                <video loop playsinline preload="none" muted src="videos/actor2/actor_25.mp4"></video>
-                            </div>
-                        </div>
-                        <div class="carousel-item" data-caption="<span style='color: #27ae60; font-weight: bold;'>[AT2V]</span> A woman in a patterned headscarf and checkered top, her face contorted in emotional 
-                                        distress as she cries out. Soft greenery blurs in the background. Subtle shoulder movements and gentle sway of leaves.">
-                            <div class="video-player audio-control">
-                                <video loop playsinline preload="none" muted src="videos/actor2/actor_3_new_2.mp4"></video>
-                            </div>
-                        </div>
-                        <div class="carousel-item" data-caption="<span style='color: #3498db; font-weight: bold;'>[ATI2V]</span> An elderly man in a leather jacket and red scarf stands on a sunny waterfront, holding a paper bag. 
-                                    Colorful buildings and sailboats fill the serene backdrop. Warm, contemplative atmosphere, subtle movement as he gazes at the sea.">
-                            <div class="video-player audio-control">
-                                <video loop playsinline preload="none" muted src="videos/actor2/actor_6_new.mp4"></video>
-                            </div>
-                        </div>
-                        <div class="carousel-item" data-caption="<span style='color: #3498db; font-weight: bold;'>[ATI2V]</span> A contemplative, intimate close-up portrait of a blonde woman. She is talking.
-                                    Her expression is thoughtful and focused, with her gaze directed slightly upward and to the right, 
-                                    as if in reflection. Her right index finger rests gently against her lower lip, emphasizing a moment 
-                                    of deep consideration.">
-                            <div class="video-player audio-control">
-                                <video loop playsinline preload="none" muted src="videos/actor2/actor_8.mp4"></video>
-                            </div>
-                        </div>
-                        <div class="carousel-item" data-caption="<span style='color: #3498db; font-weight: bold;'>[ATI2V]</span> A man in a dark blue suit, striped shirt, and red patterned tie speaks seriously into a black microphone. 
-                                    Formal indoor setting with framed portraits on the wall. Subtle gestures and slight head turns as he addresses the room.">
-                            <div class="video-player audio-control">
-                                <video loop playsinline preload="none" muted src="videos/actor2/actor_13_new.mp4"></video>
-                            </div>
-                        </div>
-                        <div class="carousel-item" data-caption="<span style='color: #3498db; font-weight: bold;'>[ATI2V]</span> A man in a leather jacket stands before a vintage gas pump, speaking to a woman with her back turned. 
-                                    Warm outdoor light, rustic setting, nostalgic atmosphere. Subtle gestures and a gentle breeze.">
-                            <div class="video-player audio-control">
-                                <video loop playsinline preload="none" muted src="videos/actor2/actor_22.mp4"></video>
-                            </div>
-                        </div>
-                        <div class="carousel-item" data-caption="<span style='color: #3498db; font-weight: bold;'>[ATI2V]</span> A cinematic medium shot of a man and woman in a tense, silent standoff among vibrant pineapples and 
-                                    lush green leaves at a tropical outdoor market. Dappled natural light, warm vivid colors, her red lips a stark focal point. Subtle breath, shifting gaze, and rustling foliage.">
-                            <div class="video-player audio-control">
-                                <video loop playsinline preload="none" muted src="videos/actor2/actor_23.mp4"></video>
-                            </div>
-                        </div>
-                        <div class="carousel-item" data-caption="<span style='color: #3498db; font-weight: bold;'>[ATI2V]</span> A man in a dark pinstripe suit and patterned tie looks thoughtfully to the side. Soft wooden panels and a blurred 
-                                    audience fill the warm, formal background. Subtle breath and focused gaze.">
-                            <div class="video-player audio-control">
-                                <video loop playsinline preload="none" muted src="videos/actor2/actor_21_new.mp4"></video>
-                            </div>
-                        </div>
-                        <div class="carousel-item" data-caption="<span style='color: #3498db; font-weight: bold;'>[ATI2V]</span> A cinematic medium shot of an elderly man in a corduroy jacket, sitting pensively on 
-                                        a dark couch. Soft, diffused light filters through sheer lace curtains in a dim room, creating a somber, introspective atmosphere. Subtle breathing movement.">
-                            <div class="video-player audio-control">
-                                <video loop playsinline preload="none" muted src="videos/actor2/actor_5.mp4"></video>
-                            </div>
-                        </div>
-                        <div class="carousel-item" data-caption="<span style='color: #3498db; font-weight: bold;'>[ATI2V]</span> A woman in a sparkling silver gown holds a star trophy, delivering a speech on stage under a spotlight. 
-                                    A deep blue, starry backdrop creates a glamorous award ceremony atmosphere. Subtle gestures and gentle light shimmer.">
-                            <div class="video-player audio-control">
-                                <video loop playsinline preload="none" muted src="videos/actor2/actor_15_new.mp4"></video>
-                            </div>
-                        </div>
-                        <div class="carousel-item" data-caption="<span style='color: #3498db; font-weight: bold;'>[ATI2V]</span> A man in a brown corduroy jacket and plaid shirt, seated in a dim room with lush green plants. Warm, earthy tones, 
-                                    intimate cinematic atmosphere. Subtle facial movements and a slow, thoughtful breath.">
-                            <div class="video-player audio-control">
-                                <video loop playsinline preload="none" muted src="videos/actor2/actor_17.mp4"></video>
-                            </div>
-                        </div>
-                        <div class="carousel-item" data-caption="<span style='color: #3498db; font-weight: bold;'>[ATI2V]</span> A solemn elderly man with grey hair in a checkered suit, white shirt, and dark tie, standing before warm vertical 
-                                    wooden panels. Serious expression, subtle breath and eye movement in a formal, muted-toned setting.">
-                            <div class="video-player audio-control">
-                                <video loop playsinline preload="none" muted src="videos/actor2/actor_18_new.mp4"></video>
-                            </div>
-                        </div>
-                        <div class="carousel-item" data-caption="<span style='color: #3498db; font-weight: bold;'>[ATI2V]</span> A close-up of a middle-aged man with grey hair and beard, wearing a formal dark suit, white shirt, and black tie.
-                                    A serious expression, a warm, softly blurred wooden background. Subtle, thoughtful head movement and steady breath.">
-                            <div class="video-player audio-control">
-                                <video loop playsinline preload="none" muted src="videos/actor2/actor_20.mp4"></video>
-                            </div>
-                        </div>
-
-                        <div class="carousel-item" data-caption="<span style='color: #3498db; font-weight: bold;'>[ATI2V]</span> A woman with red lips in a dark blue shirt, her serious gaze fixed on a man in a dark jacket beside her, both standing against a clear, bright blue sky. 
-                                    Tense cinematic atmosphere. Subtle movements: her focused stare, a gentle breeze.">
-                            <div class="video-player audio-control">
-                                <video loop playsinline preload="none" muted src="videos/actor2/actor_24.mp4"></video>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button class="carousel-nav next">›</button>
-                <div class="carousel-caption"></div>
-
-                <div class="carousel-dots"></div>
-            </div>
-            <div class="audio-button audio-button-mobile"></div>
-        </section>
-
-
-
-
-
-<section id="singer">
-    <div class="text">
-        <h1>Singer</h1>
-        Generates dynamic body motions that rhythmically align with vocals, enabling vibrant and cohesive performances from start to finish without quality degradation.
-    </div>
-    <div class="carousel-container" id="carousel-singer">
-        <button class="carousel-nav prev">‹</button>
-        <div class="carousel-wrapper">
-            <div class="carousel-track">
-                <div class="carousel-item" data-caption="<span style='color: #3498db; font-weight: bold;'>[ATI2V]</span> A cheerful cartoon owl in a fluffy outfit stands on stage under 
-                    a bright spotlight, holding a microphone. Its large, round eyes are expressive, and it gestures warmly with one wing against a dark background. The warm lighting 
-                    creates a cozy, spotlight effect.">
-                    <div class="video-player audio-control">
-                        <video loop playsinline preload="none" muted src="videos/singer2/bird.mp4"></video>
-                    </div>
-                </div>  
-                <div class="carousel-item" data-caption="<span style='color: #27ae60; font-weight: bold;'>[AT2V]</span> On a concert stage illuminated by dramatic spotlights, 
-                            a female singer stands at the microphone, passionately performing a song. The camera smoothly circles around the singer, capturing dynamic angles as she
-                            tightly held the microphone with both hands and moves body to the rhythm of the music. The energetic atmosphere is enhanced by the vibrant lighting and 
-                            the presence of musical equipment in the background.  ">
-                    <div class="video-player audio-control">
-                        <video loop playsinline preload="none" muted src="videos/singer2/t2v_singer_2.mp4"></video>
-                    </div>
-                </div>
-                <div class="carousel-item" data-caption="<span style='color: #27ae60; font-weight: bold;'>[AT2V]</span> A male singer is strumming an acoustic guitar and 
-                            singing passionately into a microphone. He wears a decorated leather jacket and several necklaces. The singer moves his fingers along the guitar strings, 
-                            fully immersed in his live performance. ">
-                    <div class="video-player audio-control">
-                        <video loop playsinline preload="none" muted src="videos/singer2/t2v_singer_7.mp4"></video>
-                    </div>
-                </div>
-                <div class="carousel-item" data-caption="<span style='color: #3498db; font-weight: bold;'>[ATI2V]</span> A cinematic medium shot of a young woman with long, wavy hair, she is singing, seated on a wooden stool in an intimate, vintage-inspired recording space. 
-                        She is gently playing an acoustic guitar, her fingers softly pressing the strings near the soundhole. The room is cozy and dimly lit, with soft,
-                        warm natural light filtering through a large window behind her.  ">
-                    <div class="video-player audio-control">
-                        <video loop playsinline preload="none" muted src="videos/singer2/never_marry.mp4"></video>
-                    </div>
-                </div>
-                <div class="carousel-item" data-caption="<span style='color: #3498db; font-weight: bold;'>[ATI2V]</span> A cinematic wide shot of a passionate male singer performing center stage. He is singing. 
-                        He is dressed formally in a tailored dark blue suit with a black bow tie, 
-                        holding a microphone close to his mouth with his right hand. His posture and expression convey intense emotion and focus. 
-                        The stage is dramatically illuminated by bright,  warm spotlights that create a sharp contrast with the darker surroundings,
-                        highlighting the singer against the grandeur of the setting.">
-                    <div class="video-player audio-control">
-                        <video loop playsinline preload="none" muted src="videos/singer2/softly_love.mp4"></video>
-                    </div>
-                </div>             
-                <div class="carousel-item" data-caption="<span style='color: #27ae60; font-weight: bold;'>[AT2V]</span> A woman stands in the middle of a deserted environment at night, 
-                        illuminated by bright streetlights behind her. She holds a microphone with both hands and talks passionately, her voice echoing through the quiet surroundings. 
-                        The scene captures her emotional performance as she delivers the song, creating a dramatic and atmospheric moment. ">
-                    <div class="video-player audio-control">
-                        <video loop playsinline preload="none" muted src="videos/singer2/t2v_singer_8.mp4"></video>
-                    </div>
-                </div>
-                <div class="carousel-item" data-caption="<span style='color: #3498db; font-weight: bold;'>[ATI2V]</span> On a concert stage illuminated by dramatic spotlights, 
-                            a female singer stands at the microphone, passionately performing a song. The camera smoothly circles around the singer, capturing dynamic angles as 
-                            she tightly held the microphone with both hands and moves body to the rhythm of the music. The energetic atmosphere is enhanced by the vibrant lighting 
-                            and the presence of musical equipment in the background.">
-                    <div class="video-player audio-control">
-                        <video loop playsinline preload="none" muted src="videos/singer2/i2v_singer_2.mp4"></video>
-                    </div>
-                </div>   
-                <div class="carousel-item" data-caption="<span style='color: #3498db; font-weight: bold;'>[ATI2V]</span> A male singer wearing a white long dress sits comfortably 
-                            on a sofa at home, holding a microphone in his right hand. He begins to talk, gently swaying to the rhythm of the music, occasionally gesturing with his free hand to 
-                            emphasize the lyrics. The relaxed atmosphere highlights his passion for performing in a cozy, intimate setting.">
-                    <div class="video-player audio-control">
-                        <video loop playsinline preload="none" muted src="videos/singer2/i2v_singer_3.mp4"></video>
-                    </div>
-                </div>   
-                <div class="carousel-item" data-caption="<span style='color: #3498db; font-weight: bold;'>[ATI2V]</span> A male singer stands in a luxury recording studio, 
-                        speaking into a professional microphone. The studio is equipped with high-end acoustic panels and warm lighting, creating an inviting atmosphere as the singer 
-                        continues to talk passionately.">
-                    <div class="video-player audio-control">
-                        <video loop playsinline preload="none" muted src="videos/singer2/i2v_singer_4.mp4"></video>
-                    </div>
-                </div>   
-                <div class="carousel-item" data-caption="<span style='color: #3498db; font-weight: bold;'>[ATI2V]</span> A man stands on rocky terrain by the seaside at sunset, 
-                        wearing headphones and holding a microphone. He held a microphone in one hand and clenched it into a fist with the other. The camera smoothly circles around the singer, 
-                        capturing dynamic angles as he passionately talks, surrounded by seagulls flying overhead. The waves crash against the rocks in the background, 
-                        creating a lively and dynamic atmosphere as the singer performs outdoors..">
-                    <div class="video-player audio-control">
-                        <video loop playsinline preload="none" muted src="videos/singer2/i2v_singer_6.mp4"></video>
-                    </div>
-                </div>  
-                <div class="carousel-item" data-caption="<span style='color: #3498db; font-weight: bold;'>[ATI2V]</span> A man stands on stage under dramatic lighting, holding 
-                        a microphone close to their mouth. Wearing a vibrant red jacket with gold embroidery, the singer is speaking while smoke swirls around them, creating a dynamic
-                        and atmospheric scene.">
-                    <div class="video-player audio-control">
-                        <video loop playsinline preload="none" muted src="videos/singer2/i2v_singer_7.mp4"></video>
-                    </div>
-                </div>  
-                <div class="carousel-item" data-caption="<span style='color: #3498db; font-weight: bold;'>[ATI2V]</span> cartoon style. A pig is talking and dancing.">
-                    <div class="video-player audio-control">
-                        <video loop playsinline preload="none" muted src="videos/singer2/i2v_singer_10.mp4"></video>
-                    </div>
-                </div>  
-                <div class="carousel-item" data-caption="<span style='color: #3498db; font-weight: bold;'>[ATI2V]</span> An old cow with a chubby belly stands up, speaking and staring ahead.
-                        It is a Q-version character with Tang Dynasty fashion aesthetics, He is shaking his body and dancing passionately..">
-                    <div class="video-player audio-control">
-                        <video loop playsinline preload="none" muted src="videos/singer2/i2v_singer_13.mp4"></video>
-                    </div>
-                </div>  
-                <div class="carousel-item" data-caption="<span style='color: #3498db; font-weight: bold;'>[ATI2V]</span> A tiny, ultra small alien sits perfectly and speaking on 
-                    the tip of a human thumb, even smaller than usual, with delicate fur and cute big eyes.">
-                    <div class="video-player audio-control">
-                        <video loop playsinline preload="none" muted src="videos/singer2/i2v_singer_12.mp4"></video>
-                    </div>
-                </div>  
-            </div>
-        </div>
-        <button class="carousel-nav next">›</button>
-        <div class="carousel-caption"></div>
-
-        <div class="carousel-dots"></div>
-    </div>
-    <!-- <div class="carousel-caption"></div> -->
-    <div class="audio-button audio-button-mobile"></div>
-</section>
-
-
-<section id="podcast">
-    <div class="text">
-        <h1>Podcast</h1>
-        Supports long-form speaking with stable, high-quality video output, ensuring the host’s appearance remains consistent and engaging throughout the entire session.
-    </div>
-    <div class="carousel-container" id="carousel-podcast">
-        <button class="carousel-nav prev">‹</button>
-
-        <div class="carousel-wrapper">
-            <div class="carousel-track">
-                <div class="carousel-item" data-caption="<span style='color: #3498db; font-weight: bold;'>[ATI2V]</span> A focused man in a dark blue sweater sits before a microphone, preparing to speak. Warm light from a golden 
-                                lamp illuminates a backdrop of a wooden bookshelf and a leafy green plant, creating a cozy, professional podcast atmosphere. ">
-                    <div class="video-player audio-control">
-                        <video loop playsinline preload="none" muted src="videos/podcast2/podcast_3.mp4"></video>
-                    </div>
-                </div>
-                <div class="carousel-item" data-caption="<span style='color: #3498db; font-weight: bold;'>[ATI2V]</span>A focused man in a dark blue sweater sits before a microphone, preparing to speak. Warm light from a golden
-                                lamp illuminates a backdrop of a wooden bookshelf and a leafy green plant, creating a cozy, professional podcast atmosphere. ">
-                    <div class="video-player audio-control">
-                        <video loop playsinline preload="none" muted src="videos/podcast2/podcast_4.mp4"></video>
-                    </div>
-                </div>
-                <div class="carousel-item" data-caption="<span style='color: #3498db; font-weight: bold;'>[ATI2V]</span> A woman with brown hair in a white sleeveless top speaks into a studio microphone, her hands gesturing gently.
-                                Shelves with plants and framed photos line the warmly lit, cozy background. ">
-                    <div class="video-player audio-control">
-                        <video loop playsinline preload="none" muted src="videos/podcast2/podcast_2.mp4"></video>
-                    </div>
-                </div>
-                <div class="carousel-item" data-caption="<span style='color: #3498db; font-weight: bold;'>[ATI2V]</span> A woman with wavy brown hair in a cozy cream sweater sits on a plush sofa, her hands moving gently as 
-                                she speaks. Warm light from a floor lamp glows beside a vase of fresh flowers, casting soft shadows 
-                                in a serene living room with flowing neutral curtains.">
-                    <div class="video-player audio-control">
-                        <video loop playsinline preload="none" muted src="videos/podcast2/podcast_1.mp4"></video>
-                    </div>
-                </div>
-                <div class="carousel-item" data-caption="<span style='color: #3498db; font-weight: bold;'>[ATI2V]</span> A man in a blue denim jacket speaks thoughtfully into a black studio microphone, 
-                                surrounded by the warm, textured backdrop of a wooden shelf and lush green plants. Soft, natural lighting creates 
-                                a calm and focused atmosphere, perfect for a podcast or interview.">
-                    <div class="video-player audio-control">
-                        <video loop playsinline preload="none" muted src="videos/podcast2/podcast_5.mp4"></video>
-                    </div>
-                </div>
-                <div class="carousel-item" data-caption="<span style='color: #3498db; font-weight: bold;'>[ATI2V]</span> A man in a blue shirt gestures animatedly while speaking 
-                                into a studio microphone. The background is an urban loft with large industrial windows, a blue sofa, and a green plant, 
-                                bathed in soft, warm, natural light. Relaxed yet professional atmosphere.">
-                    <div class="video-player audio-control">
-                        <video loop playsinline preload="none" muted src="videos/podcast2/podcast_6.mp4"></video>
-                    </div>
-                </div>
-                <div class="carousel-item" data-caption="<span style='color: #3498db; font-weight: bold;'>[ATI2V]</span> A middle-aged Asian man in a dark blue blazer gestures expressively 
-                                at a podcast desk with a microphone, notepad, and pen. The background features dark curtains with 
-                                vertical blue light strips, creating a professional studio atmosphere.">
-                    <div class="video-player audio-control">
-                        <video loop playsinline preload="none" muted src="videos/podcast2/podcast_7.mp4"></video>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <button class="carousel-nav next">›</button>
-        <div class="carousel-caption"></div>
-
-        <div class="carousel-dots"></div>
-    </div>
-    <div class="audio-button audio-button-mobile"></div>
-</section>
-
-
-<section id="sales">
-    <div class="text">
-        <h1>Sales</h1>
-        Creates smooth, professional presentations by intelligently handling silent audio segments with natural gestures, avoiding awkward pauses or stiffness.
-    </div>
-    <div class="carousel-container" id="carousel-sales">
-        <button class="carousel-nav prev">‹</button>
-        <div class="carousel-wrapper">
-            <div class="carousel-track">
-                <div class="carousel-item" data-caption="<span style='color: #3498db; font-weight: bold;'>[ATI2V]</span> A cheerful woman in a colorful comic-print hoodie sits at a desk, 
-                        pouring snacks from a large yellow bag. A computer screen glows beside other vibrant snack bags on 
-                        a blue-and-pink background, creating a playful unboxing vibe.">
-                    <div class="video-player audio-control">
-                        <video loop playsinline preload="none" muted src="videos/sales2/sale_5.mp4"></video>
-                    </div>
-                </div>
-                <div class="carousel-item" data-caption="<span style='color: #3498db; font-weight: bold;'>[ATI2V]</span> A woman in a light robe applies skincare from a small amber dropper, 
-                        surrounded by sunlit potted plants and white ceramics in a warm, cozy room. Gentle natural lighting, 
-                        subtle hand movement, peaceful atmosphere.">
-                    <div class="video-player audio-control">
-                        <video loop playsinline preload="none" muted src="videos/sales2/sale_6.mp4"></video>
-                    </div>
-                </div>
-                <div class="carousel-item" data-caption="<span style='color: #3498db; font-weight: bold;'>[ATI2V]</span> A woman with blonde hair in a straw hat and sunglasses looks out to sea,
-                        her light clothes and the blue sky creating a bright, breezy vacation scene. Gentle movement of hair and distant sailboats.">
-                    <div class="video-player audio-control">
-                        <video loop playsinline preload="none" muted src="videos/sales2/sale_9.mp4"></video>
-                    </div>
-                </div>
-                <div class="carousel-item" data-caption="<span style='color: #3498db; font-weight: bold;'>[ATI2V]</span> A woman with wavy dark-brown hair in a white strapless top excitedly holds up a golden 
-                        skincare bottle at a table filled with luxury beauty products. 
-                        Elegant white, gold, and beige setting. Subtle hand movement and excited expression.">
-                    <div class="video-player audio-control">
-                        <video loop playsinline preload="none" muted src="videos/sales2/sale_1.mp4"></video>
-                    </div>
-                </div>
-                <div class="carousel-item" data-caption="<span style='color: #3498db; font-weight: bold;'>[ATI2V]</span> A sleek black-suited woman in white gloves elegantly presents a diamond ring on a tray. 
-                        Upscale jewelry display backdrop with warm lighting. Subtle smile, a soft breath, delicate shimmer on the ring.">
-                    <div class="video-player audio-control">
-                        <video loop playsinline preload="none" muted src="videos/sales2/sale_3.mp4"></video>
-                    </div>
-                </div>
-                <div class="carousel-item" data-caption="<span style='color: #3498db; font-weight: bold;'>[ATI2V]</span> A muscular man in a dark blue shirt, crouching intently before supplement 
-                        containers on a gym table. Energetic atmosphere with workout equipment and blurred people in the background. 
-                        Cool-toned lighting, subtle forward lean and focused gaze.">
-                    <div class="video-player audio-control">
-                        <video loop playsinline preload="none" muted src="videos/sales2/sale_4.mp4"></video>
-                    </div>
-                </div>
-
-                <div class="carousel-item" data-caption="<span style='color: #3498db; font-weight: bold;'>[ATI2V]</span> A smiling muscular man in a blue tank top stands confidently in a bright, 
-                        spacious room with large windows overlooking a city. Natural light, vibrant blue and gray tones, 
-                        relaxed atmosphere. Subtle hand gestures and gentle breath.">
-                    <div class="video-player audio-control">
-                        <video loop playsinline preload="none" muted src="videos/sales2/sale_7.mp4"></video>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <button class="carousel-nav next">›</button>
-        <div class="carousel-caption"></div>
-
-        <div class="carousel-dots"></div>
-    </div>
-    <!-- <div class="carousel-caption"></div> -->
-    <div class="audio-button audio-button-mobile"></div>
-</section>
-
-<section id="multiperson">
-    <div class="text">
-        <h1>Multi-Person</h1>
-        Seamlessly handles complex interactive scenarios by generating synchronized videos for multiple speakers, maintaining individual identity characteristics while ensuring natural turn-taking behaviors and group dynamics.
-    </div>
-    <div class="carousel-container" id="carousel-multiperson">
-        <button class="carousel-nav prev">‹</button>
-        <div class="carousel-wrapper">
-            <div class="carousel-track">
-                <div class="carousel-item" data-caption="<span style='color: #3498db; font-weight: bold;'>[ATI2V]</span> A cinematic shot of a woman and man, sitting side-by-side in a warm, 
-                                richly colored interior with soft, golden lighting. 
-                                They share a quiet, intimate moment, both gazing thoughtfully into the distance with composed postures, evoking a nostalgic,
-                                mid-century atmosphere filled with unspoken conversation.">
-                    <div class="video-player audio-control">
-                        <video loop playsinline preload="none" muted src="videos/multihuman2/multi_1.mp4"></video>
-                    </div>
-                </div>
-                <div class="carousel-item" data-caption="<span style='color: #3498db; font-weight: bold;'>[ATI2V]</span> A man in a gray suit and a woman in a beige cardigan sit on a couch,
-                                preparing for a video call visible on a tablet before them. A ring light illuminates the cozy, professional room lined with a wooden bookshelf and plants. 
-                                They lean in slightly, engaged in quiet conversation, conveying a collaborative and modern work atmosphere.">
-                    <div class="video-player audio-control">
-                        <video loop playsinline preload="none" muted src="videos/multihuman2/multi_2.mp4"></video>
-                    </div>
-                </div>
-                <div class="carousel-item" data-caption="<span style='color: #3498db; font-weight: bold;'>[ATI2V]</span> A smiling blonde woman in a white top holds a vibrant red lipstick, 
-                    posing with a cheerful man in a black shirt. They stand close in a soft-lit studio with warm, diffused lighting, creating a bright and friendly advertisement-like atmosphere.">
-                    <div class="video-player audio-control">
-                        <video loop playsinline preload="none" muted src="videos/multihuman2/multi_3.mp4"></video>
-                    </div>
-                </div>
-                <div class="carousel-item" data-caption="<span style='color: #3498db; font-weight: bold;'>[ATI2V]</span> A heartwarming scene in a bright yellow playroom.
-                                A young boy in a dark blue shirt holds hands and smiles brightly with a blonde woman in a light top. Colorful toy bins and playful wall decals of animals 
-                                surround them, creating a joyful and nurturing atmosphere.">
-                    <div class="video-player audio-control">
-                        <video loop playsinline preload="none" muted src="videos/multihuman2/multi_4.mp4"></video>
-                    </div>
-                </div>
-                <div class="carousel-item" data-caption="<span style='color: #3498db; font-weight: bold;'>[ATI2V]</span> A male and female news anchor in modern suits stand behind a sleek, 
-                            holographic news desk. A large, curved screen behind them displays a dynamic global map 
-                            with glowing, teal-colored data visualizations and charts that animate in real time. The atmosphere is cool, high-tech, and professional">
-                    <div class="video-player audio-control">
-                        <video loop playsinline preload="none" muted src="videos/multihuman2/multi_5.mp4"></video>
-                    </div>
-                </div>
-                <div class="carousel-item" data-caption="<span style='color: #3498db; font-weight: bold;'>[ATI2V]</span> A man and woman in a recording studio stand facing each other, 
-                            both wearing headphones. A large professional microphone with a pop filter is positioned between them. Warm, dim light illuminates the soundproof panels on the walls, 
-                            creating an intimate and collaborative atmosphere. Subtle movements include a shared glance, a slight nod, and the adjustment of a headphone.">
-            <div class="video-player audio-control">
-                <video loop playsinline preload="none" muted src="videos/multihuman2/multi_6.mp4"></video>
-            </div>
-        </div>
-            </div>
-        </div>
-        <button class="carousel-nav next">›</button>
-        <div class="carousel-caption"></div>
-
-        <div class="carousel-dots"></div>
-    </div>
-    <!-- <div class="carousel-caption"></div> -->
-    <div class="audio-button audio-button-mobile"></div>
-</section>
-
-
-<section id="longvideo">
-    <div class="text">
-        <h1> Long Video Generation</h1>
-        Support long video generation with stable lip synchronization, consistent identity, and unnoticeable color tone accumulation. Here is a 5-minute example. 
-    </div>
-    <div class="carousel-container" id="carousel-longvideo">
-        <button class="carousel-nav prev">‹</button>
-        <div class="carousel-wrapper">
-            <div class="carousel-track">
-                <div class="carousel-item" data-caption="<span style='color: #3498db; font-weight: bold;'>[ATI2V]</span> A woman with wavy brown hair in a cozy cream sweater sits on a plush sofa, her hands moving gently as 
-                                she speaks. Warm light from a floor lamp glows beside a vase of fresh flowers, casting soft shadows 
-                                in a serene living room with flowing neutral curtains.">
-                    <div class="video-player audio-control">
-                        <video loop playsinline preload="none" muted src="videos/5min/720_5min_compressed.mp4"></video>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <button class="carousel-nav next">›</button>
-        <div class="carousel-caption"></div>
-
-        <div class="carousel-dots"></div>
-    </div>
-    <!-- <div class="carousel-caption"></div> -->
-    <div class="audio-button audio-button-mobile"></div>
-</section>
-
-
-
-
-
-<section id="identity">
-    <div class="text">
-        <h1>What is LongCat-Video-Avatar?</h1>
-        <p>
-            LongCat-Video-Avatar is an audio-driven video generation model that can generates super-realistic,lip-synchronized long video generation with natural dynamics and consistent identity.
-            It supports multiple video generation modes, incluing text-audio-to-video (<span style='color: #27ae60; font-weight: bold;'>[AT2V]</span>) generation, image-text-audio-to-video (<span style='color: #3498db; font-weight: bold;'>[ATI2V]</span>) generation, and video continuation. 
-        </p>
-    </div>
-
-    <div class="identity-container">
-        
-        <div class="identity-half">
-            <div class="text">
-                <h2>Audio-Text-to-Video [AT2V]</h2>
-            </div>
-            <div class="grid">
-                
-                <div class="video-player">
-                    <div class="text-prompt-box">
-                        "Static medium shot. Man in denim jacket and beanie talking on snowy shore, gazing at city skyline across frozen river. Muted cool tones, winter light, slow pan."
-                        </div>
-                    <figcaption class="video-caption">Text input</figcaption>
-                </div>
-
-                <div class="video-player audio-control span22">
-                    <video muted loop playsinline preload="none" src="videos/demo2/0005-00-Static camera, full-body medium shot. A contemplat.mp4"></video>
-                </div>
-
-                <div class="video-player">
-                    <audio controls style="width: 100%; margin-top: auto;">
-                        <source src="videos/demo2/actor_6.wav" type="audio/wav">
-                    </audio>
-                    <figcaption class="video-caption">Audio input</figcaption>
-                </div>
-            </div>
-        </div>
-
-        <div class="identity-half">
-            <div class="text">
-                <h2>Audio-Text-Image-to-Video [ATI2V]</h2>
-            </div>
-            <div class="grid">
-                <div class="video-player audio-control">
-                    <img src="videos/demo2/i2v_singer_9.png" style="width:100%; height:100%; object-fit:cover;"></img>
-                    <figcaption class="video-caption">Image input</figcaption>
-                </div>
-
-                <div class="video-player audio-control span22">
-                    <video muted loop playsinline preload="none" src="videos/demo2/i2v_singer_9.mp4"></video>
-                </div>
-
-                <div class="video-player" style="display: flex; flex-direction: column;">
-                    <audio controls style="width: 100%;">
-                        <source src="videos/demo2/i2v_singer_9.wav" type="audio/wav">
-                    </audio>
+                <div class="feature-video audio-control" data-video-slot="introduction-main">
+                    <video muted loop playsinline preload="none" src="videos/introduction/introduction.mp4"></video>
                     
-                    <div class="text-prompt-box small">
-                        "A woman holds a microphone with both hands and talks passionately, her voice echoing through the quiet surroundings.
-                        </div>
-
-                    <figcaption class="video-caption">Audio & Text input</figcaption>
                 </div>
-            </div>
-        </div>
+            </section>
         
-    </div>    
-    <div class="audio-button audio-button-mobile"></div>
-</section>
-        <section id="audio">
-            <div class="text">
-                <h1>
-                    InfiniteTalk v.s. LongCat-Video-Avatar
-                </h1>
-            </div>
-            <div class="audio-button audio-button-mobile"></div>
-            <div class="text">
-                Comparison: LongCat-Video-Avatar achieves more vivid performance and natural dynamics than InfiniteTalk.
-            </div>
-            <div class="grid2">
-                <div class="video-player audio-control">
-                    <video muted loop playsinline preload="none" src="videos/comp_avatar2/inf_demo_2.mp4"></video>
-                    <figcaption class="video-caption">InfiniteTalk</figcaption>
-                </div>
-                <div class="video-player audio-control">
-                    <video muted loop playsinline preload="none" src="videos/comp_avatar2/long_demo_2.mp4"></video>
-                    <figcaption class="video-caption">LongCat-Video-Avatar (Ours)</figcaption>
-                </div>
-                <div class="video-player audio-control">
-                    <video muted loop playsinline preload="none" src="videos/comp_avatar2/inf_demo_3.mp4"></video>
-                    <figcaption class="video-caption">InfiniteTalk</figcaption>
-                </div>
-                <div class="video-player audio-control">
-                    <video muted loop playsinline preload="none" src="videos/comp_avatar2/long_demo_3.mp4"></video>
-                    <figcaption class="video-caption">LongCat-Video-Avatar (Ours)</figcaption>
-                </div>
-                <div class="video-player audio-control">
-                    <video muted loop playsinline preload="none" src="videos/comp_avatar2/inf_demo_1.mp4"></video>
-                    <figcaption class="video-caption">InfiniteTalk</figcaption>
-                </div>
-                <div class="video-player audio-control">
-                    <video muted loop playsinline preload="none" src="videos/comp_avatar2/long_demo_1.mp4"></video>
-                    <figcaption class="video-caption">LongCat-Video-Avatar (Ours)</figcaption>
-                </div>
-            </div>
-        </section>
-
-        <section class="section">
-            <div class="container is-max-desktop">
-              <!-- Abstract. -->
-              <div class="columns is-centered has-text-centered">
-                <div class="column is-four-fifths">
-                  <h1>Abstract</h1>
-                  <div class="content has-text-justified">
+            <section id="stability">
+                <div class="text">
+                    <h1>Stability and Consistency</h1>
                     <p>
-                        Recent advances in audio-driven human video synthesis have significantly improved the realism
-                        of half-body and full-body generation. However, generating long-duration sequences remains a
-                        persistent challenge, as existing methods often suffer from error accumulation and identity drift over
-                        time. While reference image injection strategies (e.g., InfiniteTalk) have been proposed to mitigate
-                        these issues, they frequently result in a rigid “copy-paste” phenomenon and limited motion diversity
-                        due to conditional image leakage. Furthermore, current models exhibit an undesirable over-reliance
-                        on speech signals, leading to unnaturally static behaviors during silent segments. To address these
-                        limitations, we present LongCat-Video-Avatar, a unified architecture designed for super-realistic,
-                        lip-synchronized long video generation with natural dynamics and consistent identity. It supports
-                        multiple video generation modes, including text-audio-to-video, text-audio-image-to-video, and
-                        audio-conditioned video continuation. We first analyze the coupling between speech and human
-                        motion, proposing a Disentangled Unconditional Guidance strategy that separates audio signals from
-                        motion dynamics to ensure natural behavior even in the absence of speech. To alleviate the “copy-
-                        paste” issue, we introduce a Reference Skip Attention mechanism that strategically incorporates
-                        reference cues to preserve identity while preventing excessive leakage, thereby balancing visual
-                        fidelity with motion richness. Additionally, to tackle error accumulation caused by redundant VAE
-                        decode-encode cycles in autoregressive generation, we propose a Cross-Chunk Latent Stitching
-                        strategy. Extensive evaluations demonstrate the effectiveness of our approach in generating super
-                        realistic, long-duration human videos.
+                        Demonstrate stronger mouth-shape accuracy, smooth expression transitions, identity consistency, and coherent full-body motion. Good candidates here include tongue twisters, long speaking shots, multi-person scenes, and hand-object interactions.
                     </p>
-                  </div>
                 </div>
-              </div>
-            </div>
-        </section>
-
-        <section class="section">
-            <div class="container is-max-desktop">
-              <div class="columns is-centered has-text-centered">
-                <!-- <div class="column is-four-fifths"> -->
-                <div class="column">
-                  <h1 class="title is-3">Method</h1>
-                  <div class="content has-text-justified">
-                    <p>
-                        We introduce LongCat-Video-Avatar, a unified DiT-based framework designed for generating super-realistic, long-duration audio-driven human videos with consistent identity and natural dynamics. To address the issue of unnatural static postures during silent intervals, we propose Disentangled Unconditional Guidance, which effectively decouples speech signals from global body motion by distinguishing silent audio embeddings from null conditions. Furthermore, to prevent identity drift without inducing rigid "copy-paste" artifacts, we devise a Reference Skip Attention mechanism that selectively incorporates reference cues to balance visual fidelity with motion diversity. Finally, we implement Cross-Chunk Latent Stitching, a training strategy that eliminates redundant VAE decode-encode cycles to reduce pixel degradation and bridge the train-test gap, ensuring seamless video continuation. Our architecture also extends to multi-person scenarios through L-ROPE-based audio-visual binding.
-                    </p>
-                    <div class="column">
-                      <img src="images/pipeline.png" width="100%"/>
+        
+                <div class="carousel-container" id="carousel-stability">
+                    <button class="carousel-nav prev">‹</button>
+                    <div class="carousel-wrapper">
+                        <div class="carousel-track">
+                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/talk/1.mp4"></video></div></div>
+                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/talk/2.mp4"></video></div></div>
+                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/talk/3.mp4"></video></div></div>
+                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/talk/4.mp4"></video></div></div>
+                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/talk/5.mp4"></video></div></div>
+                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/talk/6.mp4"></video></div></div>
+                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/talk/7.mp4"></video></div></div>
+                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/talk/8.mp4"></video></div></div>
+                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/talk/9.mp4"></video></div></div>
+                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/talk/10.mp4"></video></div></div>
+                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/talk/11.mp4"></video></div></div>
+                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/talk/12.mp4"></video></div></div>
+                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/talk/13.mp4"></video></div></div>
+                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/talk/14.mp4"></video></div></div>
+                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/talk/15.mp4"></video></div></div>
+                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/talk/16.mp4"></video></div></div>
+                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/talk/17.mp4"></video></div></div>
+                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/talk/18.mp4"></video></div></div>
+                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/talk/19.mp4"></video></div></div>
+                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/talk/20.mp4"></video></div></div>
+                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/talk/21.mp4"></video></div></div>
+                        </div>
                     </div>
-                  </div>          
+                    <button class="carousel-nav next">›</button>
+                    <div class="carousel-caption"></div>
+                    <div class="carousel-dots"></div>
                 </div>
-              </div>
-            </div>
-          </section>
-
-          <section id="team">
-            <div class="content">
-                <h1 class="title is-3">Ethical Considerations</h1>
-                <p> Part of images and audios are derived from real videos solely to demonstrate the capabilities of this research, e.g., expressions, gestures, and naturalness. 
-                    The generated content is for academic use only and commercial use is not permitted. If there are any concerns, please contact us 
-                    (zhangyong202303@gmail.com) and we will delete it in time.</p>
-                
-            </div>
-        </section>
-
+        
+                <div class="showcase-title">
+                    <h2>Singing and Performance</h2>
+                    <p>Singing examples for dynamic motion, musical expression, and stable full-body or upper-body performance.</p>
+                </div>
+                <div class="carousel-container" id="carousel-singing">
+                    <button class="carousel-nav prev">‹</button>
+                    <div class="carousel-wrapper">
+                        <div class="carousel-track">
+                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/singing/1.mp4"></video></div></div>
+                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/singing/2.mp4"></video></div></div>
+                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/singing/3.mp4"></video></div></div>
+                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/singing/4.mp4"></video></div></div>
+                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/singing/5.mp4"></video></div></div>
+                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/singing/6.mp4"></video></div></div>
+                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/singing/7.mp4"></video></div></div>
+                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/singing/8.mp4"></video></div></div>
+                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/singing/9.mp4"></video></div></div>
+                        </div>
+                    </div>
+                    <button class="carousel-nav next">›</button>
+                    <div class="carousel-caption"></div>
+                    <div class="carousel-dots"></div>
+                </div>
+        
+                <div class="showcase-title">
+                    <h2>Animation</h2>
+                    <p>Animation examples with expressive motion, stylized characters, and stable audio-driven performance.</p>
+                </div>
+                <div class="carousel-container" id="carousel-animation">
+                    <button class="carousel-nav prev">‹</button>
+                    <div class="carousel-wrapper">
+                        <div class="carousel-track">
+                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/animations/1.mp4"></video></div></div>
+                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/animations/2.mp4"></video></div></div>
+                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/animations/3.mp4"></video></div></div>
+                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/animations/4.mp4"></video></div></div>
+                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/animations/5.mp4"></video></div></div>
+                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/animations/6.mp4"></video></div></div>
+                        </div>
+                    </div>
+                    <button class="carousel-nav next">›</button>
+                    <div class="carousel-caption"></div>
+                    <div class="carousel-dots"></div>
+                </div>
+        
+                <div class="showcase-title">
+                    <h2>Multi-Person Interaction</h2>
+                    <p>Multi-speaker and group interaction cases with stable identities and natural turn-taking behavior.</p>
+                </div>
+                <div class="carousel-container" id="carousel-multitalk">
+                    <button class="carousel-nav prev">‹</button>
+                    <div class="carousel-wrapper">
+                        <div class="carousel-track">
+                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/multitalk/1.mp4"></video></div></div>
+                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/multitalk/2.mp4"></video></div></div>
+                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/multitalk/3.mp4"></video></div></div>
+                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/multitalk/4.mp4"></video></div></div>
+                            <div class="carousel-item" data-caption=""><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/multitalk/5.mp4"></video></div></div>
+                        </div>
+                    </div>
+                    <button class="carousel-nav next">›</button>
+                    <div class="carousel-caption"></div>
+                    <div class="carousel-dots"></div>
+                </div>
+            </section>
+        
+            <section id="commercial">
+                <div class="text">
+                    <h1>Commercial Model Comparison</h1>
+                    <p>
+                        Compare LongCat-Video-Avatar 1.5 with HeyGen, Kling Avatar 2.0, and OmniHuman-1.5 under the same or similar inputs, focusing on stability, consistency, and natural lip motion.
+                    </p>
+                </div>
+        
+                <div class="showcase-title">
+                    <h2>Lip-Sync</h2>
+                </div>
+                <div class="grid grid4">
+                    <div class="comparison-card ours">
+                        <div class="video-player audio-control" data-video-slot="commercial-longcat-15">
+                            <video muted loop playsinline preload="none" src="videos/comparison_commerical/lip_sync/LC_1_1.mp4"></video>
+                            
+                        </div>
+                        <h2>LongCat-Video-Avatar 1.5</h2>
+                        <!-- <p>Open-source model with stronger human preference in stability, consistency, and lip naturalness.</p> -->
+                    </div>
+                    <div class="comparison-card">
+                        <div class="video-player audio-control" data-video-slot="commercial-heygen">
+                            <video muted loop playsinline preload="none" src="videos/comparison_commerical/lip_sync/Heygen_1_1.mp4"></video>
+                            
+                        </div>
+                        <h2>HeyGen</h2>
+                        <!-- <p>Commercial baseline for avatar video generation and presenter-style use cases.</p> -->
+                    </div>
+                    <div class="comparison-card">
+                        <div class="video-player audio-control" data-video-slot="commercial-kling-avatar-20">
+                            <video muted loop playsinline preload="none" src="videos/comparison_commerical/lip_sync/Kling_1_1.mp4"></video>
+                            
+                        </div>
+                        <h2>Kling Avatar 2.0</h2>
+                        <!-- <p>Commercial baseline for comparing motion realism, identity consistency, and visual quality.</p> -->
+                    </div>
+                    <div class="comparison-card">
+                        <div class="video-player audio-control" data-video-slot="commercial-omnihuman-15">
+                            <video muted loop playsinline preload="none" src="videos/comparison_commerical/lip_sync/omnihuman.mp4"></video>
+                            
+                        </div>
+                        <h2>OmniHuman-1.5</h2>
+                        <!-- <p>Reference baseline for evaluating long-form human synthesis and body-motion consistency.</p> -->
+                    </div>
+                </div>
+        
+                <div class="showcase-title">
+                    <h2>Singing</h2>
+                </div>
+                <div class="grid grid4">
+                    <div class="comparison-card ours"><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/comparison_commerical/sing/LC_2_1.mp4"></video></div><h2>LongCat-Video-Avatar 1.5</h2></div>
+                    <div class="comparison-card"><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/comparison_commerical/sing/Heygen_2_1.mp4"></video></div><h2>HeyGen</h2></div>
+                    <div class="comparison-card"><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/comparison_commerical/sing/Kling_2_1.mp4"></video></div><h2>Kling Avatar 2.0</h2></div>
+                    <div class="comparison-card"><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/comparison_commerical/sing/omnihuman.mp4"></video></div><h2>OmniHuman-1.5</h2></div>
+                </div>
+        
+                <div class="showcase-title">
+                    <h2>3D Animation</h2>
+                </div>
+                <div class="grid grid4">
+                    <div class="comparison-card ours"><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/comparison_commerical/3d_animation/LC_3_1.mp4"></video></div><h2>LongCat-Video-Avatar 1.5</h2></div>
+                    <div class="comparison-card"><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/comparison_commerical/3d_animation/Heygen_3_1.mp4"></video></div><h2>HeyGen</h2></div>
+                    <div class="comparison-card"><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/comparison_commerical/3d_animation/Kling_3_1.mp4"></video></div><h2>Kling Avatar 2.0</h2></div>
+                    <div class="comparison-card"><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/comparison_commerical/3d_animation/omnihuman.mp4"></video></div><h2>OmniHuman-1.5</h2></div>
+                </div>
+        
+                <div class="showcase-title">
+                    <h2>Performance</h2>
+                </div>
+                <div class="grid grid4">
+                    <div class="comparison-card ours"><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/comparison_commerical/performance/LC_4_1.mp4"></video></div><h2>LongCat-Video-Avatar 1.5</h2></div>
+                    <div class="comparison-card"><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/comparison_commerical/performance/Heygen_4_1.mp4"></video></div><h2>HeyGen</h2></div>
+                    <div class="comparison-card"><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/comparison_commerical/performance/Kling_4_1.mp4"></video></div><h2>Kling Avatar 2.0</h2></div>
+                    <div class="comparison-card"><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/comparison_commerical/performance/omnihuman.mp4"></video></div><h2>OmniHuman-1.5</h2></div>
+                </div>
+            </section>
+        
+            <section id="version">
+                <div class="text">
+                    <h1>LongCat-Video-Avatar 1.0 v.s. 1.5</h1>
+                    <p>
+                        Highlight the upgrade from 1.0 to 1.5: better mouth-shape accuracy, stronger long-video identity preservation, broader interactive scenarios, and faster 8-step generation.
+                    </p>
+                </div>
+        
+                <div class="showcase-title">
+                    <!-- <h2>Case 1</h2> -->
+                </div>
+                <div class="grid2">
+                    <div class="version-block">
+                        <div class="video-player audio-control" data-video-slot="version-longcat-10">
+                            <video muted loop playsinline preload="none" src="videos/comparison_1.0/case1/v1.mp4"></video>
+                            
+                        </div>
+                        <h2>LongCat-Video-Avatar 1.0</h2>
+                        <!-- <p>Baseline release for unified audio-driven avatar generation.</p> -->
+                    </div>
+                    <div class="version-block ours">
+                        <div class="video-player audio-control" data-video-slot="version-longcat-15">
+                            <video muted loop playsinline preload="none" src="videos/comparison_1.0/case1/v1d5.mp4"></video>
+                            
+                        </div>
+                        <h2>LongCat-Video-Avatar 1.5</h2>
+                        <!-- <p>Upgraded release with Whisper-large audio encoding, per-frame optimization, and DMD acceleration.</p> -->
+                    </div>
+                </div>
+        
+                <div class="showcase-title">
+                    <!-- <h2>Case 2</h2> -->
+                </div>
+                <div class="grid2">
+                    <div class="version-block"><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/comparison_1.0/case2/v1.mp4"></video></div><h2>LongCat-Video-Avatar 1.0</h2></div>
+                    <div class="version-block ours"><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/comparison_1.0/case2/v1d5.mp4"></video></div><h2>LongCat-Video-Avatar 1.5</h2></div>
+                </div>
+        
+                <div class="showcase-title">
+                    <!-- <h2>Case 3</h2> -->
+                </div>
+                <div class="grid2">
+                    <div class="version-block"><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/comparison_1.0/case3/v1.mp4"></video></div><h2>LongCat-Video-Avatar 1.0</h2></div>
+                    <div class="version-block ours"><div class="video-player audio-control"><video muted loop playsinline preload="none" src="videos/comparison_1.0/case3/v1d5.mp4"></video></div><h2>LongCat-Video-Avatar 1.5</h2></div>
+                </div>
+        
+                <!-- <div class="notes">
+                    <div class="note">
+                        <strong>Whisper-large Audio Encoder</strong>
+                        <span>Improves phoneme representation and helps produce more accurate, fluent mouth movements.</span>
+                    </div>
+                    <div class="note">
+                        <strong>Per-Frame Optimization</strong>
+                        <span>Refines audio-visual alignment frame by frame for stronger facial and lip consistency.</span>
+                    </div>
+                    <div class="note">
+                        <strong>Long-Video Robustness</strong>
+                        <span>Keeps identity, expression, and full-body motion stable across longer generated videos.</span>
+                    </div>
+                    <div class="note">
+                        <strong>DMD 8-Step Generation</strong>
+                        <span>Accelerates inference while preserving visual quality for more practical deployment.</span>
+                    </div>
+                </div> -->
+            </section>
+        
+            <section id="team">
+                <div class="content">
+                    <h1 class="title is-3">Ethical Considerations</h1>
+                    <p> Part of images and audios are derived from real videos solely to demonstrate the capabilities of this research, e.g., expressions, gestures, and naturalness. 
+                        The generated content is for academic use only and commercial use is not permitted. If there are any concerns, please contact us 
+                        (zhangyong202303@gmail.com) and we will delete it in time.</p>
+                </div>
+            </section>
 
         <script>
             // Lazy load
@@ -1932,31 +1580,33 @@
             const shotListItems = document.querySelectorAll("#shots .shots-list > div");
             const shotTimesteps = Array.from(shotListItems).map(element => parseInt(element.getAttribute("timestep")));
 
-            shotListItems.forEach(element => {
-                element.addEventListener("click", () => {
-                    const timestep = parseInt(element.getAttribute("timestep"));
-                    shotsVideo.currentTime = timestep;
+            if (shotsVideo && shotList && shotListItems.length > 0) {
+                shotListItems.forEach(element => {
+                    element.addEventListener("click", () => {
+                        const timestep = parseInt(element.getAttribute("timestep"));
+                        shotsVideo.currentTime = timestep;
+                    });
                 });
-            });
 
-            let lastShot = null;
-            shotsVideo.addEventListener("timeupdate", () => {
-                const currentTime = shotsVideo.currentTime;
-                const currentShot = shotTimesteps.findLastIndex(x => x < currentTime + 0.5);
-                if (currentShot != lastShot) {
-                    if (lastShot != null) {
-                        shotListItems[lastShot].removeAttribute("selected");
+                let lastShot = null;
+                shotsVideo.addEventListener("timeupdate", () => {
+                    const currentTime = shotsVideo.currentTime;
+                    const currentShot = shotTimesteps.findLastIndex(x => x < currentTime + 0.5);
+                    if (currentShot != lastShot) {
+                        if (lastShot != null) {
+                            shotListItems[lastShot].removeAttribute("selected");
+                        }
+                        shotListItems[currentShot].setAttribute("selected", true);
+                        if (isNarrow() && Math.abs(shotList.scrollLeft - shotListItems[currentShot].offsetLeft) < 500) {
+                            shotList.scrollTo({
+                                left: shotListItems[currentShot].offsetLeft,
+                                behavior: "smooth"
+                            });
+                        }
+                        lastShot = currentShot;
                     }
-                    shotListItems[currentShot].setAttribute("selected", true);
-                    if (isNarrow() && Math.abs(shotList.scrollLeft - shotListItems[currentShot].offsetLeft) < 500) {
-                        shotList.scrollTo({
-                            left: shotListItems[currentShot].offsetLeft,
-                            behavior: "smooth"
-                        });
-                    }
-                    lastShot = currentShot;
-                }
-            })
+                })
+            }
 
             document.addEventListener("scroll", () => {
                 const top = Math.max(Math.min(window.scrollY / 200, 1), 0);
@@ -2034,6 +1684,7 @@
             // features film
             document.querySelectorAll(".feature-video").forEach(featureVideo => {
                 const video = featureVideo.querySelector("video.final-video");
+                if (!video) return;
                 featureVideo.addEventListener("click", e => {
                     video.currentTime = 0;
                     video.play();
@@ -2095,7 +1746,7 @@ function initCarousel(containerId) {
     const items = Array.from(container.querySelectorAll('.carousel-item'));
     const prevBtn = container.querySelector('.carousel-nav.prev');
     const nextBtn = container.querySelector('.carousel-nav.next');
-    const captionDiv = container.closest('section').querySelector('.carousel-caption');
+    const captionDiv = container.querySelector('.carousel-caption');
     const dotsContainer = container.querySelector('.carousel-dots');
     
     let currentIndex = 0;
@@ -2169,7 +1820,7 @@ function initCarousel(containerId) {
     }
     
     function goToSlide(index) {
-        currentIndex = Math.max(0, Math.min(index, items.length - 1));
+        currentIndex = ((index % items.length) + items.length) % items.length;
         updateCarousel();
     }
     
@@ -2188,9 +1839,24 @@ function initCarousel(containerId) {
     nextBtn.addEventListener('click', nextSlide);
     
     // Mouse wheel support
+    let lastWheelSlideAt = 0;
+    const wheelSlideCooldown = 450;
+    const wheelSlideThreshold = 80;
+
     container.addEventListener('wheel', (e) => {
+        const absDeltaX = Math.abs(e.deltaX);
+        const absDeltaY = Math.abs(e.deltaY);
+        const mainDelta = absDeltaX > absDeltaY ? e.deltaX : e.deltaY;
+
+        if (Math.abs(mainDelta) < wheelSlideThreshold) return;
+
+        const now = Date.now();
+        if (now - lastWheelSlideAt < wheelSlideCooldown) return;
+
         e.preventDefault();
-        if (e.deltaY > 0) {
+        lastWheelSlideAt = now;
+
+        if (mainDelta > 0) {
             nextSlide();
         } else {
             prevSlide();
@@ -2200,6 +1866,7 @@ function initCarousel(containerId) {
     // Touch support
     let touchStartX = 0;
     let touchEndX = 0;
+    const touchSlideThreshold = 100;
     
     container.addEventListener('touchstart', (e) => {
         touchStartX = e.changedTouches[0].screenX;
@@ -2211,18 +1878,17 @@ function initCarousel(containerId) {
     });
     
     function handleSwipe() {
-        if (touchEndX < touchStartX - 50) {
+        if (touchEndX < touchStartX - touchSlideThreshold) {
             nextSlide();
         }
-        if (touchEndX > touchStartX + 50) {
+        if (touchEndX > touchStartX + touchSlideThreshold) {
             prevSlide();
         }
     }
     
     // Keyboard support
     document.addEventListener('keydown', (e) => {
-        const carouselSection = container.closest('section');
-        const rect = carouselSection.getBoundingClientRect();
+        const rect = container.getBoundingClientRect();
         const isInView = rect.top < window.innerHeight && rect.bottom > 0;
         
         if (isInView) {
@@ -2249,15 +1915,16 @@ function initCarousel(containerId) {
 
 // Initialize both carousels
 document.addEventListener('DOMContentLoaded', () => {
-    initCarousel('carousel-shots');
-    initCarousel('carousel-singer');
-    initCarousel('carousel-podcast');
-    initCarousel('carousel-sales');
-    initCarousel('carousel-multiperson');
-    initCarousel('carousel-longvideo');
+    initCarousel('carousel-stability');
+    initCarousel('carousel-animation');
+    initCarousel('carousel-singing');
+    initCarousel('carousel-multitalk');
 });
 
         </script>
     <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"944e28ba3a2961e3","version":"2025.4.0-1-g37f21b1","r":1,"token":"8591086b57754c278d4db02301f960eb","serverTiming":{"name":{"cfExtPri":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}}}' crossorigin="anonymous"></script>
 </body>
 </html>
+
+
+<!--   python3 -m http.server 8025 -->

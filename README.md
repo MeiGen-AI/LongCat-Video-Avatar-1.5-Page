@@ -1,4 +1,4 @@
-# LongCat-Video-Avatar 
+# LongCat-Video-Avatar 1.5
 
 <div align="center">
   <img src="assets/icons/longcat-video-avatar_logo.svg" width="45%" alt="LongCat-Video-Avatar" />
@@ -22,10 +22,14 @@
 
 
 ## 🔥 Latest News
-* Dec 16, 2025: 🚀 We are excited to announce the release of **[LongCat-Video-Avatar](https://github.com/MeiGen-AI/LongCat-Video-Avatar)**, a unified model that delivers expressive and highly dynamic audio-driven character animation, supporting native tasks including Audio-Text-to-Video, Audio-Text-Image-to-Video, and Video Continuation with seamless compatibility for both single-stream and multi-stream audio inputs. The release includes our Technical Report, [code](https://github.com/meituan-longcat/LongCat-Video), [model weights](https://huggingface.co/meituan-longcat/LongCat-Video-Avatar), and [project page](https://meigen-ai.github.io/LongCat-Video-Avatar/).
+* May 19, 2026: 🚀 We are excited to announce **LongCat-Video-Avatar 1.5**, the latest open-source release in the LC Avatar series for high-quality audio-driven video generation. Version 1.5 improves stability, lip-sync accuracy, long-video consistency, and generation speed, bringing research-grade avatar generation closer to production-ready use.
+* Dec 16, 2025: We released **[LongCat-Video-Avatar](https://github.com/MeiGen-AI/LongCat-Video-Avatar)**, a unified model that delivers expressive and highly dynamic audio-driven character animation, supporting native tasks including Audio-Text-to-Video, Audio-Text-Image-to-Video, and Video Continuation with seamless compatibility for both single-stream and multi-stream audio inputs. The release includes our Technical Report, [code](https://github.com/meituan-longcat/LongCat-Video), [model weights](https://huggingface.co/meituan-longcat/LongCat-Video-Avatar), and [project page](https://meigen-ai.github.io/LongCat-Video-Avatar/).
 
 ## ✨ Key Features: 
-- **Support Multiple Generation Modes**: one unified model can be used for audio-text-to-video (AT2V) generation,  audio-text-image-to-video （ATI2V） generation， and Video Continuation.
-- **Natural Human Dynamics**: The disentangled unconditional guidance is designed to effectively decouple speech signals from motion dynamics for natural behavior.
-- **Avoid Repetitive Content**: The reference skip attention is adopted to​ strategically incorporates reference cues to preserve identity while preventing excessive conditional image leakage
-- **Alleviate Error Accumulation from VAE**: Cross-Chunk Latent Stitching is designed to eliminates redundant VAE decode-encode cycles to reduce pixel degradation in long sequences
+- **Stronger Lip-Sync and Stability**: LongCat-Video-Avatar 1.5 adopts a Whisper-large audio encoder to produce more accurate, natural, and fluent mouth movements.
+- **Fine-Grained Audio-Visual Alignment**: Multi-stage data processing and per-frame strategy optimization help align speech with lip motion and facial expression while maintaining consistency in long videos.
+- **Consistent Full-Body Motion**: The model preserves temporal coherence across full-body movements, reducing motion jitter and identity drift over extended generation.
+- **Robust Identity Preservation**: LongCat-Video-Avatar 1.5 keeps character identity stable across frames and adapts to challenging scenarios such as multi-person videos and hand-object interactions.
+- **Fast 8-Step Generation**: With Distribution Matching Distillation (DMD), the model can generate high-quality videos in only 8 steps, significantly improving inference speed while preserving visual quality.
+- **Competitive Human Preference**: Evaluations show that LongCat-Video-Avatar 1.5 outperforms OmniHuman 1.5, HeyGen, and Kling Avatar 2.0 in stability, consistency, and natural lip motion, with stronger overall human preference.
+- **Support Multiple Generation Modes**: One unified model can be used for Audio-Text-to-Video (AT2V), Audio-Text-Image-to-Video (ATI2V), and Video Continuation.
