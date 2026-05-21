@@ -544,6 +544,15 @@
                 flex-shrink: 0; /* Prevent video from shrinking */
             }
 
+            #version .video-player {
+                aspect-ratio: 16 / 9;
+            }
+
+            #version .video-player video {
+                height: 100%;
+                object-fit: cover;
+            }
+
             .video-caption {
                 padding: 0 12px 12px;
                 color: #fff;
