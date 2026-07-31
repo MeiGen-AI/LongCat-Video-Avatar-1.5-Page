@@ -2,15 +2,17 @@ import { NextRequest, NextResponse } from 'next/server';
 import { stripe } from '@/lib/stripe';
 import { createAdmin } from '@/lib/supabase/admin';
 import { planPrice } from '@/lib/stripe';
+import { getEnv } from '@/lib/env';
 export async function POST(request: NextRequest) {
   const raw = await request.text();
   const signature = request.headers.get('stripe-signature');
   if (!signature) return NextResponse.json({ error: 'Missing signature' }, { status: 400 });
-  const event = stripe().webhooks.constructEvent(
-    raw,
-    signature,
-    process.env.STRIPE_WEBHOOK_SECRET ?? '',
-  );
+  let event;
+  try {
+    event = stripe().webhooks.constructEvent(raw, signature, getEnv().STRIPE_WEBHOOK_SECRET ?? '');
+  } catch {
+    return NextResponse.json({ error: 'Invalid signature' }, { status: 400 });
+  }
   const db = createAdmin();
   const id = event.id;
   const { data: existing } = await db
@@ -40,7 +42,7 @@ export async function POST(request: NextRequest) {
           provider_subscription_id: String(session.subscription),
           status: 'active',
         },
-        { onConflict: 'provider_subscription_id' },
+        { onConflict: 'provider,provider_subscription_id' },
       );
     }
   }

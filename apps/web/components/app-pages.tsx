@@ -2,7 +2,7 @@
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Link from 'next/link';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { estimateCredits, formatDuration, type GenerationStatus } from '@fakhm/shared';
 import { AppShell } from './layout/app-shell';
 import {
@@ -58,9 +58,28 @@ function Header({ title, eyebrow }: { title: string; eyebrow: string }) {
 export function StudioPage() {
   const [image, setImage] = useState<File>();
   const [audio, setAudio] = useState<File>();
+  const [audioDuration, setAudioDuration] = useState(1);
+  const [imageDimensions, setImageDimensions] = useState({ width: 512, height: 512 });
   const [params, setParams] = useState({ resolution: '720p', fps: 30, enhance: true });
   const [jobId, setJobId] = useState<string>();
   const [message, setMessage] = useState('');
+  useEffect(() => {
+    if (!audio) return;
+    const element = document.createElement('audio');
+    element.preload = 'metadata';
+    element.src = URL.createObjectURL(audio);
+    element.onloadedmetadata = () => setAudioDuration(Math.min(60, Math.max(1, element.duration)));
+    return () => URL.revokeObjectURL(element.src);
+  }, [audio]);
+  useEffect(() => {
+    if (!image) return;
+    const objectUrl = URL.createObjectURL(image);
+    const element = new Image();
+    element.onload = () =>
+      setImageDimensions({ width: element.naturalWidth, height: element.naturalHeight });
+    element.src = objectUrl;
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [image]);
   const mutation = useMutation({
     mutationFn: async () => {
       if (!image || !audio) throw new Error('Add an image and audio track first.');
@@ -70,7 +89,15 @@ export function StudioPage() {
           upload: { path: string; token: string; signedUrl: string };
         }>('/api/uploads/sign', {
           method: 'POST',
-          body: JSON.stringify({ kind, mime: file.type, bytes: file.size, filename: file.name }),
+          body: JSON.stringify({
+            kind,
+            mime: file.type,
+            bytes: file.size,
+            filename: file.name,
+            ...(kind === 'audio'
+              ? { durationMs: Math.round(audioDuration * 1000) }
+              : imageDimensions),
+          }),
         });
         const upload = await fetch(result.upload.signedUrl, {
           method: 'PUT',
@@ -120,7 +147,7 @@ export function StudioPage() {
               <AudioPicker file={audio} onFile={setAudio} />
             </div>
             <div className="mt-6">
-              <ParamsPanel duration={1} onChange={setParams} />
+              <ParamsPanel duration={audioDuration} onChange={setParams} />
             </div>
             <Button
               className="mt-6 w-full"

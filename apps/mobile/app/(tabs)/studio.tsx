@@ -2,35 +2,86 @@ import { useState } from 'react';
 import { Alert, Image, Pressable, Text } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import * as DocumentPicker from 'expo-document-picker';
-import { estimateCredits } from '@fakhm/shared';
+import { Audio } from 'expo-av';
+import { FILE_CONSTRAINTS, estimateCredits } from '@fakhm/shared';
 import { Button, Card, Screen, Title, Body } from '../../components';
 import { uploadAsset } from '../../lib/uploads';
 import { api } from '../../lib/api-client';
 export default function Studio() {
-  const [image, setImage] = useState<string>();
-  const [audio, setAudio] = useState<string>();
+  const [image, setImage] = useState<{
+    uri: string;
+    mime: string;
+    width: number;
+    height: number;
+    filename: string;
+  }>();
+  const [audio, setAudio] = useState<{
+    uri: string;
+    mime: string;
+    filename: string;
+    durationMs: number;
+  }>();
   const [busy, setBusy] = useState(false);
   const pickImage = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       quality: 1,
     });
-    if (!result.canceled) setImage(result.assets[0]?.uri);
+    const asset = result.canceled ? undefined : result.assets[0];
+    if (
+      asset?.uri &&
+      asset.width >= FILE_CONSTRAINTS.image.minWidth &&
+      asset.height >= FILE_CONSTRAINTS.image.minHeight
+    ) {
+      const mime = asset.mimeType ?? 'image/jpeg';
+      setImage({
+        uri: asset.uri,
+        mime,
+        width: asset.width,
+        height: asset.height,
+        filename: asset.fileName ?? `reference.${mime.split('/')[1] ?? 'jpg'}`,
+      });
+    }
   };
   const pickAudio = async () => {
     const result = await DocumentPicker.getDocumentAsync({
       type: 'audio/*',
       copyToCacheDirectory: true,
     });
-    if (!result.canceled) setAudio(result.assets[0]?.uri);
+    const asset = result.canceled ? undefined : result.assets[0];
+    if (asset?.uri) {
+      const mime = asset.mimeType ?? 'audio/mpeg';
+      if (!(FILE_CONSTRAINTS.audio.mime as readonly string[]).includes(mime))
+        return Alert.alert('Unsupported audio', 'Choose an MP3, WAV, M4A or AAC file.');
+      const sound = await Audio.Sound.createAsync({ uri: asset.uri });
+      const status = await sound.sound.getStatusAsync();
+      const durationMs = status.isLoaded ? (status.durationMillis ?? 0) : 0;
+      await sound.sound.unloadAsync();
+      if (
+        durationMs < FILE_CONSTRAINTS.audio.minDurationMs ||
+        durationMs > FILE_CONSTRAINTS.audio.maxDurationMs
+      )
+        return Alert.alert('Audio length', 'Audio must be between 1 and 60 seconds.');
+      setAudio({
+        uri: asset.uri,
+        mime,
+        filename: asset.name ?? `track.${mime.split('/')[1] ?? 'mp3'}`,
+        durationMs,
+      });
+    }
   };
   const generate = async () => {
     if (!image || !audio)
       return Alert.alert('Two inputs needed', 'Choose a reference image and audio track first.');
     setBusy(true);
     try {
-      const imageId = await uploadAsset(image, 'image', 'image/jpeg', 'jpg');
-      const audioId = await uploadAsset(audio, 'audio', 'audio/mpeg', 'mp3');
+      const imageId = await uploadAsset(image.uri, 'image', image.mime, image.filename, {
+        width: image.width,
+        height: image.height,
+      });
+      const audioId = await uploadAsset(audio.uri, 'audio', audio.mime, audio.filename, {
+        durationMs: audio.durationMs,
+      });
       await api.createGeneration({
         imageAssetId: imageId,
         audioAssetId: audioId,
@@ -52,7 +103,7 @@ export default function Studio() {
       <Card>
         <Title small>Reference image</Title>
         {image ? (
-          <Image source={{ uri: image }} style={{ height: 180, borderRadius: 14 }} />
+          <Image source={{ uri: image.uri }} style={{ height: 180, borderRadius: 14 }} />
         ) : (
           <Pressable accessibilityRole="button" onPress={pickImage}>
             <Body>Tap to choose a clear portrait</Body>

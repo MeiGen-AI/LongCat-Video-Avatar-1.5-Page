@@ -2,6 +2,7 @@ import { Alert } from 'react-native';
 import { router } from 'expo-router';
 import { Button, Card, Screen, Title, Body } from '../../components';
 import { supabase } from '../../lib/supabase';
+import { api } from '../../lib/api-client';
 export default function Settings() {
   const signOut = async () => {
     await supabase.auth.signOut();
@@ -36,7 +37,18 @@ export default function Settings() {
             {
               text: 'Continue',
               style: 'destructive',
-              onPress: () => fetch('/api/me/delete', { method: 'DELETE' }),
+              onPress: async () => {
+                try {
+                  await api.deleteAccount();
+                  await supabase.auth.signOut();
+                  router.replace('/');
+                } catch (error) {
+                  Alert.alert(
+                    'Unable to delete account',
+                    error instanceof Error ? error.message : 'Try again.',
+                  );
+                }
+              },
             },
           ])
         }

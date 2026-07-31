@@ -1,4 +1,4 @@
-import { PropsWithChildren, ReactNode, useEffect, useState } from 'react';
+import { ComponentProps, PropsWithChildren, ReactNode, useEffect, useState } from 'react';
 import {
   ActivityIndicator,
   AppState,
@@ -16,10 +16,28 @@ export function Screen({ children }: PropsWithChildren) {
   const c = useTheme();
   return <View style={[styles.screen, { backgroundColor: c.background }]}>{children}</View>;
 }
-export function Card({ children, style }: PropsWithChildren<{ style?: StyleProp<ViewStyle> }>) {
+export function Card({
+  children,
+  style,
+  onPress,
+  ...props
+}: PropsWithChildren<
+  { style?: StyleProp<ViewStyle>; onPress?: () => void } & ComponentProps<typeof Pressable>
+>) {
   const c = useTheme();
-  return (
-    <View style={[styles.card, { backgroundColor: c.panel, borderColor: `${c.text}18` }, style]}>
+  return onPress ? (
+    <Pressable
+      {...props}
+      onPress={onPress}
+      style={[styles.card, { backgroundColor: c.panel, borderColor: `${c.text}18` }, style]}
+    >
+      {children}
+    </Pressable>
+  ) : (
+    <View
+      style={[styles.card, { backgroundColor: c.panel, borderColor: `${c.text}18` }, style]}
+      {...props}
+    >
       {children}
     </View>
   );
@@ -39,15 +57,17 @@ export function Button({
   onPress,
   secondary = false,
   loading = false,
+  ...props
 }: {
   children: ReactNode;
   onPress?: () => void;
   secondary?: boolean;
   loading?: boolean;
-}) {
+} & ComponentProps<typeof Pressable>) {
   const c = useTheme();
   return (
     <Pressable
+      {...props}
       accessibilityRole="button"
       onPress={onPress}
       style={[

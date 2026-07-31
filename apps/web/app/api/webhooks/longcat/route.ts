@@ -1,26 +1,28 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { webhookJobSchema } from '@fakhm/shared';
+import { mapProviderStatus, webhookJobSchema } from '@fakhm/shared';
 import { verifyWebhookSignature } from '@/lib/longcat';
 import { createAdmin } from '@/lib/supabase/admin';
 import { copyOutput } from '@/lib/storage';
 import { notify } from '@/lib/notifications';
 import { track } from '@/lib/analytics';
+import { refundCredits } from '@/lib/credits';
 export async function POST(request: NextRequest) {
   const body = await request.text();
   if (!(await verifyWebhookSignature(body, request.headers.get('x-longcat-signature') ?? '')))
     return NextResponse.json({ error: 'Invalid signature' }, { status: 401 });
   const payload = webhookJobSchema.parse(JSON.parse(body));
+  const eventId = payload.event_id;
   const db = createAdmin();
   const { data: existing } = await db
     .from('webhook_events')
     .select('id')
     .eq('provider', 'longcat')
-    .eq('external_id', payload.id)
+    .eq('external_id', eventId)
     .maybeSingle();
   if (existing) return NextResponse.json({ ok: true });
   await db.from('webhook_events').insert({
     provider: 'longcat',
-    external_id: payload.id,
+    external_id: eventId,
     payload,
     processed_at: new Date().toISOString(),
   });
@@ -30,9 +32,10 @@ export async function POST(request: NextRequest) {
     .eq('provider_job_id', payload.id)
     .single();
   if (!generation) return NextResponse.json({ ok: true });
-  const terminal = ['succeeded', 'failed', 'canceled'].includes(payload.status);
+  const status = mapProviderStatus(payload.status);
+  const terminal = ['succeeded', 'failed', 'canceled'].includes(status);
   let outputAssetId = generation.output_asset_id;
-  if (payload.status === 'succeeded' && payload.video_url) {
+  if (status === 'succeeded' && payload.video_url) {
     outputAssetId = crypto.randomUUID();
     const path = await copyOutput(payload.video_url, `${generation.user_id}/${outputAssetId}.mp4`);
     await db.from('assets').insert({
@@ -45,10 +48,6 @@ export async function POST(request: NextRequest) {
       bytes: 0,
     });
   }
-  const status =
-    payload.status === 'succeeded'
-      ? 'succeeded'
-      : (payload.status as 'failed' | 'canceled' | 'processing');
   await db
     .from('generations')
     .update({
@@ -66,6 +65,9 @@ export async function POST(request: NextRequest) {
     message: payload.error ?? status,
   });
   if (terminal) {
+    if (status === 'failed' || status === 'canceled') {
+      await refundCredits(generation.user_id, generation.credits_charged, generation.id);
+    }
     await notify(
       generation.user_id,
       status === 'succeeded' ? 'Your video is ready' : 'Your generation finished',

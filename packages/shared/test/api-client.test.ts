@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { createApiClient, createGenerationSchema } from '../src';
+import { createApiClient, createGenerationSchema, mapProviderStatus } from '../src';
 
 describe('createApiClient', () => {
   it('adds the bearer token and returns JSON', async () => {
@@ -41,5 +41,14 @@ describe('generation schema', () => {
         audioAssetId: crypto.randomUUID(),
       }).success,
     ).toBe(false);
+  });
+});
+
+describe('provider statuses', () => {
+  it('maps provider terminal statuses to internal statuses', () => {
+    expect(mapProviderStatus('completed')).toBe('succeeded');
+    expect(mapProviderStatus('failed')).toBe('failed');
+    expect(mapProviderStatus('canceled')).toBe('canceled');
+    expect(mapProviderStatus('rendering')).toBe('rendering');
   });
 });
