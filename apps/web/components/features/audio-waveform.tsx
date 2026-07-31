@@ -1,0 +1,1 @@
+export { AudioWaveform } from './studio';
