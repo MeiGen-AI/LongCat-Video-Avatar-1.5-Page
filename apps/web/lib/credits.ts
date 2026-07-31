@@ -23,5 +23,5 @@ export async function refundCredits(userId: string, amount: number, generationId
     generation_id: generationId,
     metadata: {},
   });
-  if (error) throw error;
+  if (error && error.code !== '23505') throw error;
 }
