@@ -1,0 +1,1 @@
+export { CreditLedgerTable } from './studio';

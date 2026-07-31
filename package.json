@@ -1,0 +1,30 @@
+{
+  "name": "fakhm-studio",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Fakhm Studio — cross-platform AI avatar video studio powered by LongCat-Video-Avatar 1.5",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "npm run dev --workspace @fakhm/web",
+    "dev:mobile": "npm run start --workspace @fakhm/mobile",
+    "build": "npm run build --workspace @fakhm/shared && npm run build --workspace @fakhm/web",
+    "lint": "npm run lint --workspace @fakhm/web",
+    "typecheck": "npm run typecheck --workspace @fakhm/shared && npm run typecheck --workspace @fakhm/web && npm run typecheck --workspace @fakhm/mobile",
+    "test": "npm run test --workspace @fakhm/shared",
+    "format": "prettier --write \"apps/**/*.{ts,tsx,json,css}\" \"packages/**/*.{ts,tsx,json}\" \"*.{json,md}\" && sql-formatter -l postgresql --fix supabase/migrations/0001_init.sql && sql-formatter -l postgresql --fix supabase/migrations/0002_storage_cleanup.sql",
+    "format:check": "prettier --check \"apps/**/*.{ts,tsx,json,css}\" \"packages/**/*.{ts,tsx,json}\" \"*.{json,md}\"",
+    "db:push": "supabase db push",
+    "db:reset": "supabase db reset"
+  },
+  "devDependencies": {
+    "prettier": "3.3.3",
+    "sql-formatter": "^15.8.2",
+    "typescript": "5.5.4"
+  }
+}
