@@ -26,7 +26,12 @@ describe('backend pure logic', () => {
     expect(rateLimitKey(undefined, '127.0.0.1')).toBe('ip:127.0.0.1');
   });
   it('parses provider payloads', () =>
-    expect(webhookJobSchema.parse({ id: 'job', status: 'processing', progress: 40 }).progress).toBe(
-      40,
-    ));
+    expect(
+      webhookJobSchema.parse({
+        id: 'job',
+        event_id: 'delivery-1',
+        status: 'processing',
+        progress: 40,
+      }).progress,
+    ).toBe(40));
 });

@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { generationIdSchema } from '@fakhm/shared';
+import { generationIdSchema, mapProviderStatus, ProviderStatus } from '@fakhm/shared';
 import { withApi } from '@/lib/api';
 import { createAdmin } from '@/lib/supabase/admin';
 import { getJob } from '@/lib/longcat';
@@ -17,14 +17,9 @@ export const POST = withApi({
     if (error) throw error;
     if (!g.provider_job_id) return NextResponse.json({ generation: g });
     const job = await getJob(g.provider_job_id);
-    const status =
-      job.status === 'completed'
-        ? 'succeeded'
-        : job.status === 'failed'
-          ? 'failed'
-          : job.status === 'canceled'
-            ? 'canceled'
-            : 'processing';
+    const parsedStatus = ProviderStatus.safeParse(job.status);
+    if (!parsedStatus.success) throw new Error('Unknown provider status');
+    const status = mapProviderStatus(parsedStatus.data);
     const { data, error: updateError } = await db
       .from('generations')
       .update({
@@ -39,6 +34,10 @@ export const POST = withApi({
       .select()
       .single();
     if (updateError) throw updateError;
+    if (status === 'failed' || status === 'canceled') {
+      const { refundCredits } = await import('@/lib/credits');
+      await refundCredits(g.user_id, g.credits_charged, g.id);
+    }
     return NextResponse.json({ generation: data });
   },
 });

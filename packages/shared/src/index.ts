@@ -13,6 +13,22 @@ export const GenerationStatus = z.enum([
   'canceled',
 ]);
 export type GenerationStatus = z.infer<typeof GenerationStatus>;
+export const ProviderStatus = z.enum([
+  'queued',
+  'processing',
+  'rendering',
+  'completed',
+  'failed',
+  'canceled',
+]);
+export type ProviderStatus = z.infer<typeof ProviderStatus>;
+export function mapProviderStatus(status: ProviderStatus): GenerationStatus {
+  if (status === 'completed') return 'succeeded';
+  if (status === 'failed' || status === 'canceled') return status;
+  if (status === 'queued') return 'queued';
+  if (status === 'rendering') return 'rendering';
+  return 'processing';
+}
 export const AssetKind = z.enum(['image', 'audio', 'video']);
 export type AssetKind = z.infer<typeof AssetKind>;
 export const SubscriptionStatus = z.enum([
@@ -244,6 +260,9 @@ export const uploadSignRequestSchema = z.object({
   mime: z.string(),
   bytes: z.number().int().positive(),
   filename: z.string().min(1).max(255),
+  durationMs: z.number().int().positive().optional(),
+  width: z.number().int().positive().optional(),
+  height: z.number().int().positive().optional(),
 });
 export const profileUpdateSchema = z.object({
   displayName: z.string().max(80).optional(),
@@ -267,7 +286,8 @@ export const analyticsEventSchema = z.object({
 });
 export const webhookJobSchema = z.object({
   id: z.string().min(1),
-  status: GenerationStatus,
+  status: ProviderStatus,
+  event_id: z.string().min(1),
   progress: z.number().int().min(0).max(100).optional(),
   video_url: z.string().url().optional(),
   error: z.string().optional(),

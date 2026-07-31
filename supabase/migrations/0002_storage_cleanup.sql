@@ -41,9 +41,22 @@ select
 
 create or replace function public.cleanup_expired_assets () returns void language plpgsql security definer
 set
-  search_path = public as $$ declare g record;
- begin for g in select id,output_asset_id from generations where expires_at is not null and expires_at<now() loop delete from assets where id=g.output_asset_id;
- delete from generations where id=g.id;
- end loop;
- end;
- $$;
+  search_path = public as $$
+declare
+  g record;
+begin
+  for g in
+    select id, output_asset_id, user_id
+    from generations
+    where expires_at is not null and expires_at < now()
+  loop
+    delete from storage.objects
+    where bucket_id in ('outputs', 'uploads')
+      and (storage.foldername(name))[1] = g.user_id::text
+      and (name like '%' || g.id::text || '%');
+    update generations set output_asset_id = null where id = g.id;
+    delete from assets where id = g.output_asset_id;
+    delete from generations where id = g.id;
+  end loop;
+end;
+$$;
