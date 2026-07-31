@@ -1,0 +1,24 @@
+{
+  "expo": {
+    "name": "Fakhm Studio",
+    "slug": "fakhm-studio",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "fakhmstudio",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": { "bundleIdentifier": "com.fakhmstudio.app", "supportsTablet": true },
+    "android": {
+      "package": "com.fakhmstudio.app",
+      "adaptiveIcon": { "backgroundColor": "#0B0B0D" }
+    },
+    "plugins": [
+      "expo-router",
+      "expo-notifications",
+      "expo-image-picker",
+      "expo-document-picker",
+      "expo-media-library"
+    ],
+    "experiments": { "typedRoutes": true }
+  }
+}
