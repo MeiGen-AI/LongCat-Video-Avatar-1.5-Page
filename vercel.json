@@ -1,0 +1,7 @@
+{
+  "framework": "nextjs",
+  "buildCommand": "npm run build --workspace @fakhm/shared && npm run build --workspace @fakhm/web",
+  "installCommand": "npm ci",
+  "crons": [{ "path": "/api/cron/cleanup", "schedule": "0 3 * * *" }],
+  "functions": { "apps/web/app/api/**/*.ts": { "maxDuration": 300 } }
+}

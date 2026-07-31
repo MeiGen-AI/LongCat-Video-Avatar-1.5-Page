@@ -1,0 +1,1 @@
+export { FileDropzone } from './studio';
